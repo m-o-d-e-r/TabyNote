@@ -22,6 +22,7 @@ public:
 
     QFile* getFile();
     bool getStatus();
+
 };
 
 #endif // TEXTEDITORTAB_H
