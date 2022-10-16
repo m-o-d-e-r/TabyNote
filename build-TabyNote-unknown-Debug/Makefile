@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = TabyNote1.0.0
-DISTDIR = /test/my_qt/build-TabyNote-unknown-Debug/.tmp/TabyNote1.0.0
+DISTDIR = /test/my_qt/TabyNote/build-TabyNote-unknown-Debug/.tmp/TabyNote1.0.0
 LINK          = g++
 LFLAGS        = 
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL -lpthread   
@@ -52,10 +52,10 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../TabyNote/dialog_about.cpp \
-		../TabyNote/main.cpp \
-		../TabyNote/mainwindow.cpp \
-		../TabyNote/texteditortab.cpp qrc_res.cpp \
+SOURCES       = ../TabyNote/src/dialog_about.cpp \
+		../TabyNote/src/main.cpp \
+		../TabyNote/src/mainwindow.cpp \
+		../TabyNote/src/texteditortab.cpp qrc_res.cpp \
 		moc_dialog_about.cpp \
 		moc_mainwindow.cpp \
 		moc_texteditortab.cpp
@@ -124,7 +124,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		../TabyNote/.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -145,12 +144,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../TabyNote/TabyNote.pro ../TabyNote/dialog_about.h \
-		../TabyNote/mainwindow.h \
-		../TabyNote/texteditortab.h ../TabyNote/dialog_about.cpp \
-		../TabyNote/main.cpp \
-		../TabyNote/mainwindow.cpp \
-		../TabyNote/texteditortab.cpp
+		../TabyNote/TabyNote.pro ../TabyNote/src/dialog_about.h \
+		../TabyNote/src/mainwindow.h \
+		../TabyNote/src/texteditortab.h ../TabyNote/src/dialog_about.cpp \
+		../TabyNote/src/main.cpp \
+		../TabyNote/src/mainwindow.cpp \
+		../TabyNote/src/texteditortab.cpp
 QMAKE_TARGET  = TabyNote
 DESTDIR       = 
 TARGET        = TabyNote
@@ -219,7 +218,6 @@ Makefile: ../TabyNote/TabyNote.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -300,7 +298,6 @@ Makefile: ../TabyNote/TabyNote.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -339,9 +336,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../TabyNote/res.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../TabyNote/dialog_about.h ../TabyNote/mainwindow.h ../TabyNote/texteditortab.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../TabyNote/dialog_about.cpp ../TabyNote/main.cpp ../TabyNote/mainwindow.cpp ../TabyNote/texteditortab.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../TabyNote/dialog_about.ui ../TabyNote/mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../TabyNote/src/dialog_about.h ../TabyNote/src/mainwindow.h ../TabyNote/src/texteditortab.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../TabyNote/src/dialog_about.cpp ../TabyNote/src/main.cpp ../TabyNote/src/mainwindow.cpp ../TabyNote/src/texteditortab.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../TabyNote/src/dialog_about.ui ../TabyNote/src/mainwindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -390,21 +387,21 @@ moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 compiler_moc_header_make_all: moc_dialog_about.cpp moc_mainwindow.cpp moc_texteditortab.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_dialog_about.cpp moc_mainwindow.cpp moc_texteditortab.cpp
-moc_dialog_about.cpp: ../TabyNote/dialog_about.h \
+moc_dialog_about.cpp: ../TabyNote/src/dialog_about.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /test/my_qt/build-TabyNote-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/test/my_qt/TabyNote -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../TabyNote/dialog_about.h -o moc_dialog_about.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /test/my_qt/TabyNote/build-TabyNote-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/test/my_qt/TabyNote/TabyNote -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../TabyNote/src/dialog_about.h -o moc_dialog_about.cpp
 
-moc_mainwindow.cpp: ../TabyNote/mainwindow.h \
-		../TabyNote/texteditortab.h \
+moc_mainwindow.cpp: ../TabyNote/src/mainwindow.h \
+		../TabyNote/src/texteditortab.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /test/my_qt/build-TabyNote-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/test/my_qt/TabyNote -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../TabyNote/mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /test/my_qt/TabyNote/build-TabyNote-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/test/my_qt/TabyNote/TabyNote -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../TabyNote/src/mainwindow.h -o moc_mainwindow.cpp
 
-moc_texteditortab.cpp: ../TabyNote/texteditortab.h \
+moc_texteditortab.cpp: ../TabyNote/src/texteditortab.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /test/my_qt/build-TabyNote-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/test/my_qt/TabyNote -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../TabyNote/texteditortab.h -o moc_texteditortab.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /test/my_qt/TabyNote/build-TabyNote-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/test/my_qt/TabyNote/TabyNote -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../TabyNote/src/texteditortab.h -o moc_texteditortab.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -413,13 +410,13 @@ compiler_moc_source_clean:
 compiler_uic_make_all: ui_dialog_about.h ui_mainwindow.h
 compiler_uic_clean:
 	-$(DEL_FILE) ui_dialog_about.h ui_mainwindow.h
-ui_dialog_about.h: ../TabyNote/dialog_about.ui \
+ui_dialog_about.h: ../TabyNote/src/dialog_about.ui \
 		/usr/lib/qt5/bin/uic
-	/usr/lib/qt5/bin/uic ../TabyNote/dialog_about.ui -o ui_dialog_about.h
+	/usr/lib/qt5/bin/uic ../TabyNote/src/dialog_about.ui -o ui_dialog_about.h
 
-ui_mainwindow.h: ../TabyNote/mainwindow.ui \
+ui_mainwindow.h: ../TabyNote/src/mainwindow.ui \
 		/usr/lib/qt5/bin/uic
-	/usr/lib/qt5/bin/uic ../TabyNote/mainwindow.ui -o ui_mainwindow.h
+	/usr/lib/qt5/bin/uic ../TabyNote/src/mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -431,22 +428,22 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-dialog_about.o: ../TabyNote/dialog_about.cpp ../TabyNote/dialog_about.h \
+dialog_about.o: ../TabyNote/src/dialog_about.cpp ../TabyNote/src/dialog_about.h \
 		ui_dialog_about.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialog_about.o ../TabyNote/dialog_about.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialog_about.o ../TabyNote/src/dialog_about.cpp
 
-main.o: ../TabyNote/main.cpp ../TabyNote/mainwindow.h \
-		../TabyNote/texteditortab.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../TabyNote/main.cpp
+main.o: ../TabyNote/src/main.cpp ../TabyNote/src/mainwindow.h \
+		../TabyNote/src/texteditortab.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../TabyNote/src/main.cpp
 
-mainwindow.o: ../TabyNote/mainwindow.cpp ../TabyNote/mainwindow.h \
-		../TabyNote/texteditortab.h \
+mainwindow.o: ../TabyNote/src/mainwindow.cpp ../TabyNote/src/mainwindow.h \
+		../TabyNote/src/texteditortab.h \
 		ui_mainwindow.h \
-		../TabyNote/dialog_about.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../TabyNote/mainwindow.cpp
+		../TabyNote/src/dialog_about.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../TabyNote/src/mainwindow.cpp
 
-texteditortab.o: ../TabyNote/texteditortab.cpp ../TabyNote/texteditortab.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o texteditortab.o ../TabyNote/texteditortab.cpp
+texteditortab.o: ../TabyNote/src/texteditortab.cpp ../TabyNote/src/texteditortab.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o texteditortab.o ../TabyNote/src/texteditortab.cpp
 
 qrc_res.o: qrc_res.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_res.o qrc_res.cpp
