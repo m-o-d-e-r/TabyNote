@@ -9,5 +9,7 @@
         <file>images/close_tab_icon.png</file>
         <file>images/author_icon.png</file>
         <file>images/add_new_tab_icon.png</file>
+        <file>style/taby_dark.css</file>
+        <file>images/request_tab_close_icon.png</file>
     </qresource>
 </RCC>

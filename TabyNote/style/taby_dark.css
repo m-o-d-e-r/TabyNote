@@ -1,0 +1,103 @@
+
+QMainWindow {
+	background-color: #262626;
+}
+
+
+/* Menu bar style */
+QMenu {
+	background-color: #383642;
+	selection-background-color: #2F4040;
+
+	color: #E2DEF3;
+}
+QMenuBar {
+	background-color: #1F1F1F;
+	color: #E2DEF3;
+}
+
+
+/* Tool bar style*/
+QToolBar {
+	background-color: #262626;	
+	color: #E2DEF3;
+}
+QToolButton {
+	background-color: #262626;	
+}
+
+
+QScrollBar::sub-page:vertical {
+	background: #272822;
+}
+QScrollBar::add-page:vertical {
+	background: #272822;
+}
+QScrollBar::sub-page:horizonal {
+	background: #272822;
+}
+QScrollBar::add-page:horizontal {
+	background: #272822;
+}
+QScrollBar:vertical{
+	background: white;
+	width:12px;
+	margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle:vertical {
+	background: #32332c;
+	border: 2px solid #272822;
+	border-radius: 5px 5px 5px 5px;
+	min-height: 30px;
+}
+QScrollBar:horizontal{
+	background: white;
+	height:12px;
+	margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle:horizontal {
+	background: #32332c;
+	border: 2px solid #272822;
+	border-radius: 5px 5px 5px 5px;
+	min-height: 30px;
+}
+
+
+QScrollBar:vertical{
+	background: #32332c;
+}
+QScrollBar:horizontal{
+	background: #32332c;
+}
+
+
+/* Workspace editor style */
+QTabWidget {
+	background-color: #262626;
+}
+QTabBar::tab:selected {
+	color: #E2DEF3;
+}
+QTabBar::tab {
+	background-color: #262626;
+	color: #E2DEF3;
+}
+QTabBar::close-button {
+	image: url(:/images/request_tab_close_icon.png);
+	padding-left: 5px;
+}
+QTextEdit {
+	background-color: #262626;
+	color: #E2DEF3;
+}
+
+
+/* Status bar style */
+QStatusBar {
+	background-color: #1F1F1F;
+	color: #E2DEF3;
+}
+QLabel {
+	background-color: #1F1F1F;
+	color: #E2DEF3;
+}
