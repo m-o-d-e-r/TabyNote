@@ -22,11 +22,6 @@
     <height>485</height>
    </size>
   </property>
-  <property name="font">
-   <font>
-    <family>Fira Code Retina</family>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>Taby note</string>
   </property>
@@ -37,7 +32,7 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="1">
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
@@ -74,15 +69,8 @@
      <x>0</x>
      <y>0</y>
      <width>716</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Fira Code Retina</family>
-     <weight>50</weight>
-     <bold>false</bold>
-    </font>
    </property>
    <property name="autoFillBackground">
     <bool>true</bool>
@@ -98,38 +86,37 @@
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
-   <widget class="QMenu" name="menuAbout">
-    <property name="font">
-     <font>
-      <family>Fira Code Retina</family>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
+   <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>About</string>
+     <string>Help</string>
     </property>
     <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuInstruments">
-    <property name="font">
-     <font>
-      <family>Fira Code Retina</family>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
     <property name="title">
      <string>Instruments</string>
     </property>
     <addaction name="actionNew_tab"/>
     <addaction name="actionClose_tab"/>
     <addaction name="separator"/>
+    <addaction name="actionOpen_Terminal"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionOwn_editor_prametrs"/>
+    <addaction name="separator"/>
+    <addaction name="actionFilemap"/>
+    <addaction name="actionRender_numbar"/>
+    <addaction name="separator"/>
     <addaction name="actionDark"/>
    </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuView"/>
    <addaction name="menuInstruments"/>
-   <addaction name="menuAbout"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="enabled">
@@ -159,8 +146,8 @@
       <colorrole role="Window">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>217</red>
-         <green>246</green>
+         <red>28</red>
+         <green>164</green>
          <blue>255</blue>
         </color>
        </brush>
@@ -188,8 +175,8 @@
       <colorrole role="Window">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>217</red>
-         <green>246</green>
+         <red>28</red>
+         <green>164</green>
          <blue>255</blue>
         </color>
        </brush>
@@ -208,8 +195,8 @@
       <colorrole role="Base">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>217</red>
-         <green>246</green>
+         <red>28</red>
+         <green>164</green>
          <blue>255</blue>
         </color>
        </brush>
@@ -217,8 +204,8 @@
       <colorrole role="Window">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>217</red>
-         <green>246</green>
+         <red>28</red>
+         <green>164</green>
          <blue>255</blue>
         </color>
        </brush>
@@ -226,12 +213,10 @@
      </disabled>
     </palette>
    </property>
-   <property name="font">
-    <font>
-     <family>Fira Code Retina</family>
-    </font>
-   </property>
    <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="sizeGripEnabled">
     <bool>true</bool>
    </property>
   </widget>
@@ -263,11 +248,6 @@
    <property name="text">
     <string>Quit</string>
    </property>
-   <property name="font">
-    <font>
-     <family>Fira Code Retina</family>
-    </font>
-   </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
@@ -278,14 +258,7 @@
      <normaloff>:/images/how_to_use_icon.png</normaloff>:/images/how_to_use_icon.png</iconset>
    </property>
    <property name="text">
-    <string>\_(-_-)_/</string>
-   </property>
-   <property name="font">
-    <font>
-     <family>Fira Code Retina</family>
-     <weight>50</weight>
-     <bold>false</bold>
-    </font>
+    <string>About</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+H</string>
@@ -308,11 +281,6 @@
    <property name="text">
     <string>Save as</string>
    </property>
-   <property name="font">
-    <font>
-     <family>Fira Code Retina</family>
-    </font>
-   </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
    </property>
@@ -325,11 +293,6 @@
    <property name="text">
     <string>Open</string>
    </property>
-   <property name="font">
-    <font>
-     <family>Fira Code Retina</family>
-    </font>
-   </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
    </property>
@@ -341,11 +304,6 @@
    </property>
    <property name="text">
     <string>Save</string>
-   </property>
-   <property name="font">
-    <font>
-     <family>Fira Code Retina</family>
-    </font>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -362,13 +320,6 @@
    <property name="toolTip">
     <string>New Tab</string>
    </property>
-   <property name="font">
-    <font>
-     <family>Fira Code Retina</family>
-     <weight>50</weight>
-     <bold>false</bold>
-    </font>
-   </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
    </property>
@@ -383,13 +334,6 @@
    </property>
    <property name="toolTip">
     <string>Close Tab</string>
-   </property>
-   <property name="font">
-    <font>
-     <family>Fira Code Retina</family>
-     <weight>50</weight>
-     <bold>false</bold>
-    </font>
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>
@@ -406,13 +350,44 @@
    <property name="text">
     <string>Dark</string>
    </property>
-   <property name="font">
-    <font>
-     <family>Fira Code</family>
-    </font>
-   </property>
    <property name="shortcut">
     <string>Alt+Shift+D</string>
+   </property>
+  </action>
+  <action name="actionFilemap">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Filemap (TODO)</string>
+   </property>
+  </action>
+  <action name="actionRender_numbar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Render Numbar (TODO)</string>
+   </property>
+  </action>
+  <action name="actionOpen_Terminal">
+   <property name="text">
+    <string>Open Terminal (TODO)</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="text">
+    <string>Font Family</string>
+   </property>
+  </action>
+  <action name="actionFont_Size">
+   <property name="text">
+    <string>Font Size</string>
+   </property>
+  </action>
+  <action name="actionOwn_editor_prametrs">
+   <property name="text">
+    <string>TabyNote global font</string>
    </property>
   </action>
  </widget>

@@ -75,11 +75,15 @@ QScrollBar:horizontal{
 QTabWidget {
 	background-color: #262626;
 }
+QTabBar::tab:hover {
+        padding-bottom: 7px;
+}
 QTabBar::tab:selected {
 	color: #E2DEF3;
+        background-color: #3D3F52;
 }
 QTabBar::tab {
-	background-color: #262626;
+        background-color: #222020;
 	color: #E2DEF3;
 }
 QTabBar::close-button {

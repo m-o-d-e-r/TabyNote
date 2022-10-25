@@ -1,5 +1,6 @@
 #include <QTextCursor>
 #include <QStyleFactory>
+#include <QFontDialog>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -34,23 +35,6 @@ void MainWindow::on_actionOpen_triggered()
     QString fileName = (new QFileInfo(fullPathToFile))->fileName();
     QFile* file = new QFile(fullPathToFile);
 
-/*
-    TextEditorTab* editor = nullptr;
-    for (int i = 0; i < ui->tabWidget->count(); i++)
-    {
-        editor =  static_cast<TextEditorTab*>(ui->tabWidget->widget(i));
-        if (editor)
-        {
-            QFileInfo editorFileInfo(editor->getFile()->fileName());
-            qDebug(editorFileInfo.fileName().toLocal8Bit().data());
-        } else
-        {
-            qDebug("error");
-        }
-        editor = nullptr;
-    }*/
-
-
     if (!file->open(QIODevice::Text | QIODevice::ReadWrite))
     {
         this->statusBar()->showMessage("Can't open file...");
@@ -58,14 +42,15 @@ void MainWindow::on_actionOpen_triggered()
     }
 
     TextEditorTab* currentEditor = new TextEditorTab(file, true);
-    currentEditor->blockSignals(true);
-    connect(currentEditor, &TextEditorTab::textChanged, this,
+//    currentEditor->getEditorWorkSpace()->blockSignals(true);
+
+    connect(currentEditor->getEditorSpace(), &QTextEdit::textChanged, this,
         [&]()
         {
             MainWindow::__on_change_text_editor_callback();
         }
     );
-    connect(currentEditor, &TextEditorTab::cursorPositionChanged, this,
+    connect(currentEditor->getEditorSpace(), &QTextEdit::cursorPositionChanged, this,
         [&]()
         {
             MainWindow::__on_cursor_position_changed_callback();
@@ -73,7 +58,7 @@ void MainWindow::on_actionOpen_triggered()
     );
 
 
-    currentEditor->setText(file->readAll());
+    currentEditor->getEditorSpace()->setText(file->readAll());
 
     ui->tabWidget->addTab(currentEditor, fileName);
     ui->tabWidget->setCurrentIndex(ui->tabWidget->count()-1);
@@ -100,7 +85,7 @@ void MainWindow::on_actionSave_as_triggered()
     if (file->open(QIODevice::Text | QIODevice::ReadWrite))
     {
         QTextStream fileStream(file);
-        fileStream << currentEditor->toPlainText();
+        fileStream << currentEditor->getEditorSpace()->toPlainText();
     }
 
     ui->actionSave->setDisabled(false);
@@ -121,11 +106,8 @@ void MainWindow::on_actionSave_triggered()
     currentEditor->getFile()->close();
     if (!currentEditor->getFile()->open(QIODevice::Text | QIODevice::ReadWrite | QIODevice::Truncate)) {return;}
 
-    currentEditor->getFile()->close();
-    if (!currentEditor->getFile()->open(QIODevice::Text | QIODevice::ReadWrite)) {return;}
-
     QTextStream fileStream(currentEditor->getFile());
-    fileStream << currentEditor->toPlainText();
+    fileStream << currentEditor->getEditorSpace()->toPlainText();
 
     currentEditor->setStatus(true);
     ui->tabWidget->setTabText(currentIndex, (new QFileInfo(currentEditor->getFile()->fileName()))->fileName());
@@ -136,14 +118,15 @@ void MainWindow::on_actionSave_triggered()
 void MainWindow::on_actionNew_tab_triggered()
 {
     TextEditorTab* tabEditor = new TextEditorTab;
-//    tabEditor->setStyleSheet(*(new QString("background-color: #191e24; color: #90bcd2")));
-    connect(tabEditor, &TextEditorTab::textChanged, this,
+
+    //    tabEditor->setStyleSheet(*(new QString("background-color: #191e24; color: #90bcd2")));
+    connect(tabEditor->getEditorSpace(), &QTextEdit::textChanged, this,
         [&]()
         {
             MainWindow::__on_change_text_editor_callback();
         }
     );
-    connect(tabEditor, &TextEditorTab::cursorPositionChanged, this,
+    connect(tabEditor->getEditorSpace(), &QTextEdit::cursorPositionChanged, this,
         [&]()
         {
             MainWindow::__on_cursor_position_changed_callback();
@@ -232,6 +215,15 @@ void MainWindow::on_actionDark_triggered()
 }
 
 
+void MainWindow::on_actionOwn_editor_prametrs_triggered()
+{
+    bool isOk;
+
+    QFont customFont = QFontDialog::getFont(&isOk);
+    qApp->setFont(customFont);
+}
+
+
 // help methods
 void MainWindow::__on_all_tabs_removed()
 {
@@ -249,6 +241,13 @@ void MainWindow::__on_change_text_editor_callback()
 
     if (!editor) {return;}
 
+    auto lineCount = editor->getEditorSpace()->document()->blockCount();
+    /*for (uint8_t i = 0; i < lineCount; i++)
+    {
+    )*/
+
+
+
     if (editor->getStatus())
     {
         ui->tabWidget->setTabText(
@@ -261,8 +260,7 @@ void MainWindow::__on_change_text_editor_callback()
 
 void MainWindow::__on_cursor_position_changed_callback()
 {
-    TextEditorTab* editor = static_cast<TextEditorTab*>(sender());
-
+    QTextEdit* editor = static_cast<QTextEdit*>(sender());
     if (editor)
     {
         QString cursorPositionString = "Pos: (%1, %2)";
