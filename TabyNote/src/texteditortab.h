@@ -14,6 +14,8 @@ class TextEditorTab : public QWidget
 
     QLabel* numBarWidget;
     QTextEdit* textEditorSpace;
+    QTextEdit* fileOverView;
+    QScrollBar* tabEditorScrollbar;
 
     QFile* file = nullptr;
     bool isSaved = false;
@@ -24,6 +26,7 @@ public:
     ~TextEditorTab();
 
     QTextEdit* getEditorSpace();
+    QTextEdit* getFileOverView();
 
     void setFile(QFile*);
     void setStatus(bool);
@@ -31,8 +34,11 @@ public:
     QFile* getFile();
     bool getStatus();
 
-    void wheelEvent(QWheelEvent *event) override;
+    //    void wheelEvent(QWheelEvent *event) override;
     void editWorkSpaceFontSize(int);
+
+public slots:
+    void on_editorScrollBar_valueChanged();
 
 };
 

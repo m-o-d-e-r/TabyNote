@@ -137,7 +137,7 @@ public:
         QObject::connect(buttonBox, SIGNAL(accepted()), dialog_about, SLOT(accept()));
         QObject::connect(buttonBox, SIGNAL(rejected()), dialog_about, SLOT(reject()));
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(dialog_about);

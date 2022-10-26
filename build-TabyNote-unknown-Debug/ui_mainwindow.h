@@ -41,6 +41,8 @@ public:
     QAction *actionFont;
     QAction *actionFont_Size;
     QAction *actionOwn_editor_prametrs;
+    QAction *actionIncrease_font_size;
+    QAction *actionDecrease_font_size;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
     QTabWidget *tabWidget;
@@ -63,6 +65,28 @@ public:
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setMinimumSize(QSize(716, 485));
+        QPalette palette;
+        QBrush brush(QColor(197, 222, 229, 255));
+        brush.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Text, brush);
+        QBrush brush1(QColor(197, 222, 229, 128));
+        brush1.setStyle(Qt::SolidPattern);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Active, QPalette::PlaceholderText, brush1);
+#endif
+        palette.setBrush(QPalette::Inactive, QPalette::Text, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush1);
+#endif
+        QBrush brush2(QColor(190, 190, 190, 255));
+        brush2.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Disabled, QPalette::Text, brush2);
+        QBrush brush3(QColor(0, 0, 0, 128));
+        brush3.setStyle(Qt::SolidPattern);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush3);
+#endif
+        MainWindow->setPalette(palette);
         actionQuit = new QAction(MainWindow);
         actionQuit->setObjectName(QString::fromUtf8("actionQuit"));
         QIcon icon;
@@ -123,6 +147,10 @@ public:
         actionFont_Size->setObjectName(QString::fromUtf8("actionFont_Size"));
         actionOwn_editor_prametrs = new QAction(MainWindow);
         actionOwn_editor_prametrs->setObjectName(QString::fromUtf8("actionOwn_editor_prametrs"));
+        actionIncrease_font_size = new QAction(MainWindow);
+        actionIncrease_font_size->setObjectName(QString::fromUtf8("actionIncrease_font_size"));
+        actionDecrease_font_size = new QAction(MainWindow);
+        actionDecrease_font_size->setObjectName(QString::fromUtf8("actionDecrease_font_size"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -139,6 +167,13 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
         tabWidget->setSizePolicy(sizePolicy2);
+        QPalette palette1;
+        QBrush brush4(QColor(0, 0, 0, 255));
+        brush4.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Active, QPalette::Text, brush4);
+        palette1.setBrush(QPalette::Inactive, QPalette::Text, brush4);
+        palette1.setBrush(QPalette::Disabled, QPalette::Text, brush2);
+        tabWidget->setPalette(palette1);
         tabWidget->setTabPosition(QTabWidget::North);
         tabWidget->setTabShape(QTabWidget::Rounded);
         tabWidget->setTabsClosable(true);
@@ -152,6 +187,11 @@ public:
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 716, 20));
+        QPalette palette2;
+        palette2.setBrush(QPalette::Active, QPalette::Text, brush4);
+        palette2.setBrush(QPalette::Inactive, QPalette::Text, brush4);
+        palette2.setBrush(QPalette::Disabled, QPalette::Text, brush2);
+        menubar->setPalette(palette2);
         menubar->setAutoFillBackground(true);
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
@@ -165,30 +205,34 @@ public:
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         statusbar->setEnabled(true);
-        QPalette palette;
-        QBrush brush(QColor(0, 0, 0, 255));
-        brush.setStyle(Qt::SolidPattern);
-        palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
-        QBrush brush1(QColor(255, 255, 255, 255));
-        brush1.setStyle(Qt::SolidPattern);
-        palette.setBrush(QPalette::Active, QPalette::Base, brush1);
-        QBrush brush2(QColor(28, 164, 255, 255));
-        brush2.setStyle(Qt::SolidPattern);
-        palette.setBrush(QPalette::Active, QPalette::Window, brush2);
-        palette.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
-        palette.setBrush(QPalette::Inactive, QPalette::Base, brush1);
-        palette.setBrush(QPalette::Inactive, QPalette::Window, brush2);
-        QBrush brush3(QColor(190, 190, 190, 255));
-        brush3.setStyle(Qt::SolidPattern);
-        palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush3);
-        palette.setBrush(QPalette::Disabled, QPalette::Base, brush2);
-        palette.setBrush(QPalette::Disabled, QPalette::Window, brush2);
-        statusbar->setPalette(palette);
+        QPalette palette3;
+        palette3.setBrush(QPalette::Active, QPalette::WindowText, brush4);
+        palette3.setBrush(QPalette::Active, QPalette::Text, brush4);
+        QBrush brush5(QColor(255, 255, 255, 255));
+        brush5.setStyle(Qt::SolidPattern);
+        palette3.setBrush(QPalette::Active, QPalette::Base, brush5);
+        QBrush brush6(QColor(28, 164, 255, 255));
+        brush6.setStyle(Qt::SolidPattern);
+        palette3.setBrush(QPalette::Active, QPalette::Window, brush6);
+        palette3.setBrush(QPalette::Inactive, QPalette::WindowText, brush4);
+        palette3.setBrush(QPalette::Inactive, QPalette::Text, brush4);
+        palette3.setBrush(QPalette::Inactive, QPalette::Base, brush5);
+        palette3.setBrush(QPalette::Inactive, QPalette::Window, brush6);
+        palette3.setBrush(QPalette::Disabled, QPalette::WindowText, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::Text, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::Base, brush6);
+        palette3.setBrush(QPalette::Disabled, QPalette::Window, brush6);
+        statusbar->setPalette(palette3);
         statusbar->setAutoFillBackground(true);
         statusbar->setSizeGripEnabled(true);
         MainWindow->setStatusBar(statusbar);
         toolBar = new QToolBar(MainWindow);
         toolBar->setObjectName(QString::fromUtf8("toolBar"));
+        QPalette palette4;
+        palette4.setBrush(QPalette::Active, QPalette::Text, brush4);
+        palette4.setBrush(QPalette::Inactive, QPalette::Text, brush4);
+        palette4.setBrush(QPalette::Disabled, QPalette::Text, brush2);
+        toolBar->setPalette(palette4);
         MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menubar->addAction(menuFile->menuAction());
@@ -206,6 +250,9 @@ public:
         menuInstruments->addAction(actionClose_tab);
         menuInstruments->addSeparator();
         menuInstruments->addAction(actionOpen_Terminal);
+        menuInstruments->addSeparator();
+        menuInstruments->addAction(actionIncrease_font_size);
+        menuInstruments->addAction(actionDecrease_font_size);
         menuView->addSeparator();
         menuView->addAction(actionOwn_editor_prametrs);
         menuView->addSeparator();
@@ -273,12 +320,20 @@ public:
 #if QT_CONFIG(shortcut)
         actionDark->setShortcut(QCoreApplication::translate("MainWindow", "Alt+Shift+D", nullptr));
 #endif // QT_CONFIG(shortcut)
-        actionFilemap->setText(QCoreApplication::translate("MainWindow", "Filemap (TODO)", nullptr));
+        actionFilemap->setText(QCoreApplication::translate("MainWindow", "Filemap (NEED FIX)", nullptr));
         actionRender_numbar->setText(QCoreApplication::translate("MainWindow", "Render Numbar (TODO)", nullptr));
         actionOpen_Terminal->setText(QCoreApplication::translate("MainWindow", "Open Terminal (TODO)", nullptr));
         actionFont->setText(QCoreApplication::translate("MainWindow", "Font Family", nullptr));
         actionFont_Size->setText(QCoreApplication::translate("MainWindow", "Font Size", nullptr));
         actionOwn_editor_prametrs->setText(QCoreApplication::translate("MainWindow", "TabyNote global font", nullptr));
+        actionIncrease_font_size->setText(QCoreApplication::translate("MainWindow", "Increase font size", nullptr));
+#if QT_CONFIG(shortcut)
+        actionIncrease_font_size->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+2", nullptr));
+#endif // QT_CONFIG(shortcut)
+        actionDecrease_font_size->setText(QCoreApplication::translate("MainWindow", "Decrease font size", nullptr));
+#if QT_CONFIG(shortcut)
+        actionDecrease_font_size->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+1", nullptr));
+#endif // QT_CONFIG(shortcut)
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
         menuInstruments->setTitle(QCoreApplication::translate("MainWindow", "Instruments", nullptr));
