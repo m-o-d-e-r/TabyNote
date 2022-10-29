@@ -90,6 +90,10 @@ QTabBar::close-button {
 	image: url(:/images/request_tab_close_icon.png);
 	padding-left: 5px;
 }
+QPlainTextEdit {
+        background-color: #262626;
+        color: #E2DEF3;
+}
 QTextEdit {
 	background-color: #262626;
 	color: #E2DEF3;

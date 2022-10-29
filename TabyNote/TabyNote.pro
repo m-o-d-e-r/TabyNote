@@ -16,6 +16,7 @@ SOURCES += \
     src/texteditortab.cpp
 
 HEADERS += \
+    src/EditorWorkSpace.h \
     src/dialog_about.h \
     src/mainwindow.h \
     src/numbarwidget.h \

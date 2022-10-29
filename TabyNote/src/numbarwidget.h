@@ -4,32 +4,22 @@
 #include <QWidget>
 #include <QPlainTextEdit>
 
+
 class TextEditorTab;
+
 
 class NumBarWidget: public QWidget
 {
+private:
     TextEditorTab* editor;
 
-    QFont painterFont;
-    int lineCount = 0;
-    int lineNumberMin = 1;
-    int lineNumberMax = 1;
-
 public:
-    NumBarWidget();
+    NumBarWidget(TextEditorTab*);
 
-    int setNumBarWidth(int);
+    QSize sizeHint() const override;
 
-    QFont getPainterFont();
-    void setPainterFont(QFont);
-
-    int getLineCount();
-
-    void paintEvent(QPaintEvent *event) override;
-
-public slots:
-    void setLineCount(int);
-    void setNumRange(int, int);
+protected:
+    void paintEvent(QPaintEvent* event) override;
 
 };
 

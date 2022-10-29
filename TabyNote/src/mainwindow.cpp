@@ -332,7 +332,7 @@ void MainWindow::__setUp_current_line_highlighting(_TE_Object* editobject)
     QList<QTextEdit::ExtraSelection> extraSelectionsList;
     QTextEdit::ExtraSelection selections;
 
-    selections.format.setBackground(Qt::darkCyan);
+    selections.format.setBackground(QColor(166, 78, 76, 100));
     selections.format.setProperty(QTextFormat::FullWidthSelection, true);
     selections.cursor = cursor;
     selections.cursor.clearSelection();
