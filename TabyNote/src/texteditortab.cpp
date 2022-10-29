@@ -1,80 +1,32 @@
 #include <QApplication>
 #include <QWheelEvent>
 #include <QScrollBar>
+#include <QTextDocument>
 #include <QFrame>
+#include <QPainter>
 
 #include "texteditortab.h"
 
 
 TextEditorTab::TextEditorTab()
 {
-    this->numBarWidget = new QLabel("1");
-    this->numBarWidget->setAlignment(Qt::AlignTop);
+    setUpNumbarWidget();
+    setUpTextEditor();
+    setUpFileOverViewWidget();
+    setUpTextEditorScrollbar();
 
-    this->textEditorSpace = new QTextEdit;
-    QFont editorWorkSpaceFont = this->textEditorSpace->currentFont();
-    editorWorkSpaceFont.setPixelSize(12);
-    this->textEditorSpace->setFont(editorWorkSpaceFont);
-    this->textEditorSpace->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    this->textEditorSpace->verticalScrollBar()->setRange(0, 1000);
-    //    this->textEditorSpace->verticalScrollBar()->setPageStep(100);
-    connect(this->textEditorSpace->verticalScrollBar(), &QScrollBar::valueChanged, this, &TextEditorTab::on_editorScrollBar_valueChanged);
+    makeConnections();
 
-    this->fileOverView = new QTextEdit;
-    this->fileOverView->setEnabled(false);
-    QFont overViewtFont = this->fileOverView->currentFont();
-    overViewtFont.setPixelSize(3);
-    this->fileOverView->setFont(overViewtFont);
-    QPalette overViewPalette;
-    overViewPalette.setColor(QPalette::Text, Qt::black);
-    this->fileOverView->setPalette(overViewPalette);
-    this->fileOverView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    this->fileOverView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    this->fileOverView->setFixedWidth(textEditorSpace->width() * 0.2);
-    this->fileOverView->setWordWrapMode(QTextOption::NoWrap);
-    //    this->fileOverView->setFrameStyle(QFrame::Plain);
-
-    QString t = QString::number(textEditorSpace->verticalScrollBar()->pageStep());
-
-    this->tabEditorScrollbar = new QScrollBar;
-    this->tabEditorScrollbar->setRange(0, 1000);
-//    this->tabEditorScrollbar->set
-    /*
-    this->tabEditorScrollbar->setRange(
-        this->textEditorSpace->verticalScrollBar()->minimum(),
-        this->textEditorSpace->verticalScrollBar()->maximum()
-    );*/
-    connect(
-        this->tabEditorScrollbar,
-        &QScrollBar::valueChanged,
-        this->textEditorSpace->verticalScrollBar(),
-        &QScrollBar::setValue
-    );
-    connect(
-        this->textEditorSpace->verticalScrollBar(),
-        &QScrollBar::valueChanged,
-        this->tabEditorScrollbar,
-        &QScrollBar::setValue
-    );
-
-    QHBoxLayout* test = new QHBoxLayout;
-    setLayout(test);
-
-    test->addWidget(this->numBarWidget);
-    test->addWidget(this->textEditorSpace);
-    test->addWidget(this->fileOverView);
-    test->addWidget(this->tabEditorScrollbar);
-    test->setStretch(0, 0);
-    test->setStretch(1, 1);
-    test->setStretch(2, 0);
-    test->setStretch(3, 0);
+    packMainComponents();
 }
+
 
 TextEditorTab::TextEditorTab(QFile* file_, bool saved) : TextEditorTab()
 {
     this->file = file_;
     this->isSaved = saved;
 }
+
 
 TextEditorTab::~TextEditorTab()
 {
@@ -86,15 +38,125 @@ TextEditorTab::~TextEditorTab()
 }
 
 
-QTextEdit* TextEditorTab::getEditorSpace()
+void TextEditorTab::setUpNumbarWidget()
 {
-    return this->textEditorSpace;
+    this->numBarWidget = new NumBarWidget;
+/*        this->numBarWidget->setFixedWidth(this->fileOverView->width() * 0.3);
+    */
+    //this->numBarWidget->setPainterFont(editorWorkSpaceFont);
+    /*
+        connect(
+            this->textEditorSpace->document(),
+            &QTextDocument::blockCountChanged,
+            this->numBarWidget,
+            &NumBarWidget::setLineCount
+        );*/
 }
+
+
+void TextEditorTab::setUpTextEditor()
+{
+    this->textEditor = new QPlainTextEdit;
+    QFont editorWorkSpaceFont = this->textEditor->font();
+    editorWorkSpaceFont.setPixelSize(12);
+    this->textEditor->setFont(editorWorkSpaceFont);
+    this->textEditor->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+}
+
+
+void TextEditorTab::setUpFileOverViewWidget()
+{
+    this->fileOverView = new QTextEdit;
+    this->fileOverView->setEnabled(false);
+    QFont overViewtFont = this->fileOverView->currentFont();
+    overViewtFont.setPixelSize(3);
+    this->fileOverView->setFont(overViewtFont);
+    QPalette overViewPalette;
+    overViewPalette.setColor(QPalette::Text, Qt::black);
+    this->fileOverView->setPalette(overViewPalette);
+    this->fileOverView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    this->fileOverView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    this->fileOverView->setFixedWidth(this->width() * 0.2);
+    //this->fileOverView->setFrameStyle(QFrame::Plain);
+}
+
+
+void TextEditorTab::setUpTextEditorScrollbar()
+{
+    this->textEditorScrollbar = new QScrollBar;
+    this->textEditorScrollbar->hide();
+}
+
+
+void TextEditorTab::makeConnections()
+{
+
+    connect(
+        this->textEditor,
+        &QPlainTextEdit::cursorPositionChanged,
+        this,
+        &TextEditorTab::textEditorCursorPositionChanged
+    );
+    /*connect(
+        this->textEditorSpace,
+        &QPlainTextEdit::updateRequest,
+        this,
+        &TextEditorTab::on_updates
+    );*/
+    connect(
+        this->textEditor->verticalScrollBar(),
+        &QScrollBar::valueChanged,
+        this,
+        &TextEditorTab::on_editorScrollBar_valueChanged
+    );
+    connect(
+        this->textEditor->verticalScrollBar(),
+        &QScrollBar::valueChanged,
+        this->textEditorScrollbar,
+        &QScrollBar::setValue
+    );
+    connect(
+        this->textEditor->verticalScrollBar(),
+        &QScrollBar::rangeChanged,
+        this->textEditorScrollbar,
+        [&](int min_, int max_)
+        {
+            this->textEditorScrollbar->setRange(min_, max_);
+            this->textEditorScrollbar->show();
+        }
+    );
+    connect(
+        this->textEditorScrollbar,
+        &QScrollBar::valueChanged,
+        this->textEditor->verticalScrollBar(),
+        &QScrollBar::setValue
+    );
+}
+
+
+void TextEditorTab::packMainComponents()
+{
+    QHBoxLayout* baseLayout = new QHBoxLayout;
+    setLayout(baseLayout);
+
+    baseLayout->addWidget(this->numBarWidget       , 0);
+    baseLayout->addWidget(this->textEditor         , 1);
+    baseLayout->addWidget(this->fileOverView       , 0);
+    baseLayout->addWidget(this->textEditorScrollbar, 0);
+}
+
+
+const QPlainTextEdit* TextEditorTab::getTextEditor()
+{
+    return this->textEditor;
+}
+
 
 QTextEdit* TextEditorTab::getFileOverView()
 {
     return this->fileOverView;
 }
+
 
 void TextEditorTab::setFile(QFile* file)
 {
@@ -117,29 +179,62 @@ bool TextEditorTab::getStatus()
     return this->isSaved;
 }
 
-/*void TextEditorTab::wheelEvent(QWheelEvent* event)
-{
-    Qt::KeyboardModifiers key = qApp->keyboardModifiers();
-    if (key == Qt::ControlModifier)
-    {
-        int scarollValue = event->angleDelta().y();
 
-        if (scarollValue > 0)
-            this->editWorkSpaceFontSize(2);
-        else if (scarollValue < 0)
-            this->editWorkSpaceFontSize(-2);
+void TextEditorTab::setSynchonizedText(QByteArray fileData)
+{
+    this->textEditor->setPlainText(fileData);
+    this->fileOverView->setPlainText(fileData);
+}
+
+
+void TextEditorTab::setSynchonizedText()
+{
+    this->fileOverView->setPlainText(this->textEditor->toPlainText());
+}
+
+
+void TextEditorTab::numBarChangeVisibility(bool isChecked)
+{
+    if (isChecked)
+        this->numBarWidget->show();
+    else
+        this->numBarWidget->hide();
+}
+
+
+void TextEditorTab::textEditorChangeWrapMode(bool isChecked)
+{
+    if (isChecked)
+    {
+        this->textEditor->setWordWrapMode(QTextOption::WrapAnywhere);
+        this->fileOverView->setWordWrapMode(QTextOption::WrapAnywhere);
+    } else {
+        this->textEditor->setWordWrapMode(QTextOption::NoWrap);
+        this->fileOverView->setWordWrapMode(QTextOption::NoWrap);
     }
-}*/
+}
+
+
+void TextEditorTab::fileOverViewChangeVisibility(bool isChecked)
+{
+    if (isChecked)
+        this->fileOverView->show();
+    else
+        this->fileOverView->hide();
+}
+
 
 void TextEditorTab::editWorkSpaceFontSize(int deltaSize)
 {
-    QFont currentFont = this->textEditorSpace->currentFont();
+    QFont currentFont = this->textEditor->font();
 
-    if (currentFont.pixelSize() <= 10 && deltaSize < 0)
+    if ((currentFont.pixelSize() + deltaSize) <= 10 || (currentFont.pixelSize() + deltaSize) >= 40)
         return;
 
     currentFont.setPixelSize(currentFont.pixelSize() + deltaSize);
-    this->textEditorSpace->setFont(currentFont);
+
+    this->textEditor->setFont(currentFont);
+//    this->numBarWidget->setPainterFont(currentFont);
 }
 
 
@@ -148,8 +243,21 @@ void TextEditorTab::on_editorScrollBar_valueChanged()
     QScrollBar* scrollSender =  static_cast<QScrollBar*>(sender());
 
     this->fileOverView->verticalScrollBar()->setValue(
-        scrollSender->value() * this->fileOverView->verticalScrollBar()->pageStep() / scrollSender->pageStep()
+        scrollSender->value()
+        * this->fileOverView->verticalScrollBar()->pageStep()
+        / scrollSender->pageStep()
     );
 }
 
+
+void TextEditorTab::textEditorCursorPositionChanged()
+{/*
+    QTextCursor cursor = this->textEditor->textCursor();
+
+    this->textEditorScrollbar->setValue(
+        this->textEditorScrollbar->maximum()
+        / this->textEditor->blockCount()
+        * cursor.blockNumber()
+    );*/
+}
 

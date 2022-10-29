@@ -55,6 +55,7 @@ OBJECTS_DIR   = ./
 SOURCES       = ../TabyNote/src/dialog_about.cpp \
 		../TabyNote/src/main.cpp \
 		../TabyNote/src/mainwindow.cpp \
+		../TabyNote/src/numbarwidget.cpp \
 		../TabyNote/src/texteditortab.cpp qrc_res.cpp \
 		moc_dialog_about.cpp \
 		moc_mainwindow.cpp \
@@ -62,6 +63,7 @@ SOURCES       = ../TabyNote/src/dialog_about.cpp \
 OBJECTS       = dialog_about.o \
 		main.o \
 		mainwindow.o \
+		numbarwidget.o \
 		texteditortab.o \
 		qrc_res.o \
 		moc_dialog_about.o \
@@ -147,9 +149,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../TabyNote/TabyNote.pro ../TabyNote/src/dialog_about.h \
 		../TabyNote/src/mainwindow.h \
+		../TabyNote/src/numbarwidget.h \
 		../TabyNote/src/texteditortab.h ../TabyNote/src/dialog_about.cpp \
 		../TabyNote/src/main.cpp \
 		../TabyNote/src/mainwindow.cpp \
+		../TabyNote/src/numbarwidget.cpp \
 		../TabyNote/src/texteditortab.cpp
 QMAKE_TARGET  = TabyNote
 DESTDIR       = 
@@ -339,8 +343,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../TabyNote/res.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../TabyNote/src/dialog_about.h ../TabyNote/src/mainwindow.h ../TabyNote/src/texteditortab.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../TabyNote/src/dialog_about.cpp ../TabyNote/src/main.cpp ../TabyNote/src/mainwindow.cpp ../TabyNote/src/texteditortab.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../TabyNote/src/dialog_about.h ../TabyNote/src/mainwindow.h ../TabyNote/src/numbarwidget.h ../TabyNote/src/texteditortab.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../TabyNote/src/dialog_about.cpp ../TabyNote/src/main.cpp ../TabyNote/src/mainwindow.cpp ../TabyNote/src/numbarwidget.cpp ../TabyNote/src/texteditortab.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../TabyNote/src/dialog_about.ui ../TabyNote/src/mainwindow.ui $(DISTDIR)/
 
 
@@ -399,11 +403,13 @@ moc_dialog_about.cpp: ../TabyNote/src/dialog_about.h \
 
 moc_mainwindow.cpp: ../TabyNote/src/mainwindow.h \
 		../TabyNote/src/texteditortab.h \
+		../TabyNote/src/numbarwidget.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /test/my_qt/TabyNote/build-TabyNote-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/test/my_qt/TabyNote/TabyNote -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../TabyNote/src/mainwindow.h -o moc_mainwindow.cpp
 
 moc_texteditortab.cpp: ../TabyNote/src/texteditortab.h \
+		../TabyNote/src/numbarwidget.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /test/my_qt/TabyNote/build-TabyNote-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/test/my_qt/TabyNote/TabyNote -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../TabyNote/src/texteditortab.h -o moc_texteditortab.cpp
@@ -438,16 +444,22 @@ dialog_about.o: ../TabyNote/src/dialog_about.cpp ../TabyNote/src/dialog_about.h 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialog_about.o ../TabyNote/src/dialog_about.cpp
 
 main.o: ../TabyNote/src/main.cpp ../TabyNote/src/mainwindow.h \
-		../TabyNote/src/texteditortab.h
+		../TabyNote/src/texteditortab.h \
+		../TabyNote/src/numbarwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../TabyNote/src/main.cpp
 
 mainwindow.o: ../TabyNote/src/mainwindow.cpp ../TabyNote/src/mainwindow.h \
 		../TabyNote/src/texteditortab.h \
+		../TabyNote/src/numbarwidget.h \
 		ui_mainwindow.h \
 		../TabyNote/src/dialog_about.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../TabyNote/src/mainwindow.cpp
 
-texteditortab.o: ../TabyNote/src/texteditortab.cpp ../TabyNote/src/texteditortab.h
+numbarwidget.o: ../TabyNote/src/numbarwidget.cpp ../TabyNote/src/numbarwidget.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o numbarwidget.o ../TabyNote/src/numbarwidget.cpp
+
+texteditortab.o: ../TabyNote/src/texteditortab.cpp ../TabyNote/src/texteditortab.h \
+		../TabyNote/src/numbarwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o texteditortab.o ../TabyNote/src/texteditortab.cpp
 
 qrc_res.o: qrc_res.cpp 

@@ -12,11 +12,13 @@ SOURCES += \
     src/dialog_about.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
+    src/numbarwidget.cpp \
     src/texteditortab.cpp
 
 HEADERS += \
     src/dialog_about.h \
     src/mainwindow.h \
+    src/numbarwidget.h \
     src/texteditortab.h
 
 FORMS += \

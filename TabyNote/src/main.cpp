@@ -6,11 +6,12 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
+    app.setStyle("Fusion");
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 
     MainWindow w;
     w.show();
 
-    return a.exec();
+    return app.exec();
 }
