@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/EditorWidget/FileOverViewWidget.cpp \
     src/EditorWidget/MainEditorArea.cpp \
     src/EditorWidget/NumBarWidget.cpp \
     src/dialog_about.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     src/EditorWidget/EditorWorkSpace.h \
+    src/EditorWidget/FileOverViewWidget.h \
     src/EditorWidget/MainEditorArea.h \
     src/EditorWidget/NumBarWidget.h \
     src/dialog_about.h \
