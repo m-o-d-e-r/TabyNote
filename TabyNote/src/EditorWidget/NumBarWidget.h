@@ -5,16 +5,16 @@
 #include <QPlainTextEdit>
 
 
-class TextEditorTab;
+class MainEditorArea;
 
 
 class NumBarWidget: public QWidget
 {
 private:
-    TextEditorTab* editor;
+    MainEditorArea* editor;
 
 public:
-    NumBarWidget(TextEditorTab*);
+    NumBarWidget(MainEditorArea*);
 
     QSize sizeHint() const override;
 

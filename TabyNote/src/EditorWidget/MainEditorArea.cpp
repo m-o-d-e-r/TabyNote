@@ -5,10 +5,10 @@
 #include <QFrame>
 #include <QPainter>
 
-#include "texteditortab.h"
+#include "MainEditorArea.h"
 
 
-TextEditorTab::TextEditorTab()
+MainEditorArea::MainEditorArea()
 {
     setUpNumbarWidget();
     setUpTextEditor();
@@ -21,14 +21,14 @@ TextEditorTab::TextEditorTab()
 }
 
 
-TextEditorTab::TextEditorTab(QFile* file_, bool saved) : TextEditorTab()
+MainEditorArea::MainEditorArea(QFile* file_, bool saved) : MainEditorArea()
 {
     this->file = file_;
     this->isSaved = saved;
 }
 
 
-TextEditorTab::~TextEditorTab()
+MainEditorArea::~MainEditorArea()
 {
     if (this->file)
     {
@@ -38,13 +38,13 @@ TextEditorTab::~TextEditorTab()
 }
 
 
-void TextEditorTab::setUpNumbarWidget()
+void MainEditorArea::setUpNumbarWidget()
 {
     this->numBarWidget = new NumBarWidget(this);
 }
 
 
-void TextEditorTab::setUpTextEditor()
+void MainEditorArea::setUpTextEditor()
 {
     this->textEditor = new EditorWorkSpace;
     QFont editorWorkSpaceFont = this->textEditor->font();
@@ -54,7 +54,7 @@ void TextEditorTab::setUpTextEditor()
 }
 
 
-void TextEditorTab::setUpFileOverViewWidget()
+void MainEditorArea::setUpFileOverViewWidget()
 {
     this->fileOverView = new QTextEdit;
     this->fileOverView->setEnabled(false);
@@ -71,33 +71,33 @@ void TextEditorTab::setUpFileOverViewWidget()
 }
 
 
-void TextEditorTab::setUpTextEditorScrollbar()
+void MainEditorArea::setUpTextEditorScrollbar()
 {
     this->textEditorScrollbar = new QScrollBar;
     this->textEditorScrollbar->hide();
 }
 
 
-void TextEditorTab::makeConnections()
+void MainEditorArea::makeConnections()
 {
-    connect(this->textEditor, &EditorWorkSpace::updateRequest, this, &TextEditorTab::updateNumBarWidget);
+    connect(this->textEditor, &EditorWorkSpace::updateRequest, this, &MainEditorArea::updateNumBarWidget);
     connect(
         this->textEditor,
         &QPlainTextEdit::cursorPositionChanged,
         this,
-        &TextEditorTab::textEditorCursorPositionChanged
+        &MainEditorArea::textEditorCursorPositionChanged
     );
     /*connect(
         this->textEditorSpace,
         &QPlainTextEdit::updateRequest,
         this,
-        &TextEditorTab::on_updates
+        &MainEditorArea::on_updates
     );*/
     connect(
         this->textEditor->verticalScrollBar(),
         &QScrollBar::valueChanged,
         this,
-        &TextEditorTab::on_editorScrollBar_valueChanged
+        &MainEditorArea::on_editorScrollBar_valueChanged
     );
     connect(
         this->textEditor->verticalScrollBar(),
@@ -124,7 +124,7 @@ void TextEditorTab::makeConnections()
 }
 
 
-void TextEditorTab::packMainComponents()
+void MainEditorArea::packMainComponents()
 {
     QHBoxLayout* baseLayout = new QHBoxLayout;
     setLayout(baseLayout);
@@ -136,54 +136,54 @@ void TextEditorTab::packMainComponents()
 }
 
 
-const EditorWorkSpace* TextEditorTab::getTextEditor()
+const EditorWorkSpace* MainEditorArea::getTextEditor()
 {
     return this->textEditor;
 }
 
 
-QTextEdit* TextEditorTab::getFileOverView()
+QTextEdit* MainEditorArea::getFileOverView()
 {
     return this->fileOverView;
 }
 
 
-void TextEditorTab::setFile(QFile* file)
+void MainEditorArea::setFile(QFile* file)
 {
     this->file = file;
 }
 
-void TextEditorTab::setStatus(bool status)
+void MainEditorArea::setStatus(bool status)
 {
     this->isSaved = status;
 }
 
 
-QFile* TextEditorTab::getFile()
+QFile* MainEditorArea::getFile()
 {
     return this->file;
 }
 
-bool TextEditorTab::getStatus()
+bool MainEditorArea::getStatus()
 {
     return this->isSaved;
 }
 
 
-void TextEditorTab::setSynchonizedText(QByteArray fileData)
+void MainEditorArea::setSynchonizedText(QByteArray fileData)
 {
     this->textEditor->setPlainText(fileData);
     this->fileOverView->setPlainText(fileData);
 }
 
 
-void TextEditorTab::setSynchonizedText()
+void MainEditorArea::setSynchonizedText()
 {
     this->fileOverView->setPlainText(this->textEditor->toPlainText());
 }
 
 
-void TextEditorTab::numBarChangeVisibility(bool isChecked)
+void MainEditorArea::numBarChangeVisibility(bool isChecked)
 {
     if (isChecked)
         this->numBarWidget->show();
@@ -192,7 +192,7 @@ void TextEditorTab::numBarChangeVisibility(bool isChecked)
 }
 
 
-void TextEditorTab::textEditorChangeWrapMode(bool isChecked)
+void MainEditorArea::textEditorChangeWrapMode(bool isChecked)
 {
     if (isChecked)
     {
@@ -205,7 +205,7 @@ void TextEditorTab::textEditorChangeWrapMode(bool isChecked)
 }
 
 
-void TextEditorTab::fileOverViewChangeVisibility(bool isChecked)
+void MainEditorArea::fileOverViewChangeVisibility(bool isChecked)
 {
     if (isChecked)
         this->fileOverView->show();
@@ -214,7 +214,7 @@ void TextEditorTab::fileOverViewChangeVisibility(bool isChecked)
 }
 
 
-void TextEditorTab::editWorkSpaceFontSize(int deltaSize)
+void MainEditorArea::editWorkSpaceFontSize(int deltaSize)
 {
     QFont currentFont = this->textEditor->font();
 
@@ -228,7 +228,7 @@ void TextEditorTab::editWorkSpaceFontSize(int deltaSize)
 }
 
 
-void TextEditorTab::on_editorScrollBar_valueChanged()
+void MainEditorArea::on_editorScrollBar_valueChanged()
 {
     QScrollBar* scrollSender =  static_cast<QScrollBar*>(sender());
 
@@ -240,7 +240,7 @@ void TextEditorTab::on_editorScrollBar_valueChanged()
 }
 
 
-void TextEditorTab::textEditorCursorPositionChanged()
+void MainEditorArea::textEditorCursorPositionChanged()
 {/*
     QTextCursor cursor = this->textEditor->textCursor();
 
@@ -252,7 +252,7 @@ void TextEditorTab::textEditorCursorPositionChanged()
 }
 
 
-int TextEditorTab::getNumbarWidgth()
+int MainEditorArea::getNumbarWidgth()
 {
     int digits = 1;
     int max = qMax(1, this->textEditor->blockCount());
@@ -265,7 +265,7 @@ int TextEditorTab::getNumbarWidgth()
 }
 
 
-void TextEditorTab::updateNumBarWidget(const QRect& rect, int dy)
+void MainEditorArea::updateNumBarWidget(const QRect& rect, int dy)
 {
     if (dy)
         this->numBarWidget->scroll(0, dy);
@@ -276,7 +276,7 @@ void TextEditorTab::updateNumBarWidget(const QRect& rect, int dy)
 }
 
 
-void TextEditorTab::numbarPaintEvent(QPaintEvent *event)
+void MainEditorArea::numbarPaintEvent(QPaintEvent *event)
 {
     QPainter painter(this->numBarWidget);
     painter.fillRect(event->rect(), Qt::lightGray);

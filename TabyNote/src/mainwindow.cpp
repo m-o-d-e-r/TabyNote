@@ -43,10 +43,10 @@ void MainWindow::on_actionOpen_triggered()
         return;
     }
 
-    TextEditorTab* currentEditor = new TextEditorTab(file, true);
+    MainEditorArea* currentEditor = new MainEditorArea(file, true);
     if (ui->tabWidget->count() > 0)
     {
-        TextEditorTab* firstTabEditorWidget = static_cast<TextEditorTab*>(ui->tabWidget->widget(0));
+        MainEditorArea* firstTabEditorWidget = static_cast<MainEditorArea*>(ui->tabWidget->widget(0));
         if (firstTabEditorWidget)
         {
             QFont currentFont = currentEditor->font();//currentFont();
@@ -85,7 +85,7 @@ void MainWindow::on_actionSave_as_triggered()
 {
     int currentIndex = ui->tabWidget->currentIndex();
 
-    TextEditorTab* currentEditor =  static_cast<TextEditorTab*>(ui->tabWidget->widget(currentIndex));
+    MainEditorArea* currentEditor =  static_cast<MainEditorArea*>(ui->tabWidget->widget(currentIndex));
     if (!currentEditor) {return;}
 
     QFileDialog fileDialog;
@@ -114,7 +114,7 @@ void MainWindow::on_actionSave_triggered()
 {
     int currentIndex = ui->tabWidget->currentIndex();
 
-    TextEditorTab* currentEditor =  static_cast<TextEditorTab*>(ui->tabWidget->widget(currentIndex));
+    MainEditorArea* currentEditor =  static_cast<MainEditorArea*>(ui->tabWidget->widget(currentIndex));
     if (!currentEditor) {return;}
 
     currentEditor->getFile()->close();
@@ -132,7 +132,7 @@ void MainWindow::on_actionSave_triggered()
 // operations with tabs
 void MainWindow::on_actionNew_tab_triggered()
 {
-    TextEditorTab* tabEditor = new TextEditorTab;
+    MainEditorArea* tabEditor = new MainEditorArea;
     tabEditor->numBarChangeVisibility(ui->actionRender_numbar->isChecked());
     tabEditor->textEditorChangeWrapMode(ui->actionWord_Wrap->isChecked());
     tabEditor->fileOverViewChangeVisibility(ui->actionFilemap->isChecked());
@@ -163,7 +163,7 @@ void MainWindow::on_actionClose_tab_triggered()
 
 void MainWindow::on_tabWidget_tabCloseRequested(int index)
 {
-    TextEditorTab* currentEditor = static_cast<TextEditorTab*>(ui->tabWidget->widget(index));
+    MainEditorArea* currentEditor = static_cast<MainEditorArea*>(ui->tabWidget->widget(index));
     currentEditor->deleteLater();
     ui->tabWidget->removeTab(index);
 
@@ -179,7 +179,7 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     QString newTitle = "Taby note(%1): %2";
     this->setWindowTitle(newTitle.arg(index).arg(ui->tabWidget->tabText(index)));
 
-    TextEditorTab* currentEdit = static_cast<TextEditorTab*>(ui->tabWidget->widget(index));
+    MainEditorArea* currentEdit = static_cast<MainEditorArea*>(ui->tabWidget->widget(index));
     if (!currentEdit) {return;}
 
     if (currentEdit->getFile())
@@ -247,7 +247,7 @@ void MainWindow::on_actionFilemap_triggered(bool checked)
 {
     for (int i = 0; i < ui->tabWidget->count(); i++)
     {
-        static_cast<TextEditorTab*>(
+        static_cast<MainEditorArea*>(
             ui->tabWidget->widget(i)
         )->fileOverViewChangeVisibility(checked);
     }
@@ -258,7 +258,7 @@ void MainWindow::on_actionIncrease_font_size_triggered()
 {
     for (int i = 0; i < ui->tabWidget->count(); i++)
     {
-        static_cast<TextEditorTab*>(ui->tabWidget->widget(i))->editWorkSpaceFontSize(2);
+        static_cast<MainEditorArea*>(ui->tabWidget->widget(i))->editWorkSpaceFontSize(2);
     }
 }
 
@@ -267,7 +267,7 @@ void MainWindow::on_actionDecrease_font_size_triggered()
 {
     for (int i = 0; i < ui->tabWidget->count(); i++)
     {
-        static_cast<TextEditorTab*>(ui->tabWidget->widget(i))->editWorkSpaceFontSize(-2);
+        static_cast<MainEditorArea*>(ui->tabWidget->widget(i))->editWorkSpaceFontSize(-2);
     }
 }
 
@@ -276,7 +276,7 @@ void MainWindow::on_actionWord_Wrap_triggered(bool checked)
 {
     for (int i = 0; i < ui->tabWidget->count(); i++)
     {
-        static_cast<TextEditorTab*>(ui->tabWidget->widget(i))->textEditorChangeWrapMode(checked);
+        static_cast<MainEditorArea*>(ui->tabWidget->widget(i))->textEditorChangeWrapMode(checked);
     }
 }
 
@@ -285,7 +285,7 @@ void MainWindow::on_actionRender_numbar_triggered(bool checked)
 {
     for (int i = 0; i < ui->tabWidget->count(); i++)
     {
-        static_cast<TextEditorTab*>(ui->tabWidget->widget(i))->numBarChangeVisibility(checked);
+        static_cast<MainEditorArea*>(ui->tabWidget->widget(i))->numBarChangeVisibility(checked);
     }
 }
 
@@ -304,7 +304,7 @@ void MainWindow::__on_all_tabs_removed()
 void MainWindow::__on_change_text_editor_callback()
 {
     int currentIndex = ui->tabWidget->currentIndex();
-    TextEditorTab* editor = static_cast<TextEditorTab*>(ui->tabWidget->widget(currentIndex));
+    MainEditorArea* editor = static_cast<MainEditorArea*>(ui->tabWidget->widget(currentIndex));
 
     if (!editor) {return;}
 
@@ -346,7 +346,7 @@ void MainWindow::__on_cursor_position_changed_callback()
     QPlainTextEdit* editor = static_cast<QPlainTextEdit*>(sender());
     QTextEdit* fileOverView = nullptr;
 
-    TextEditorTab* temp = static_cast<TextEditorTab*>(
+    MainEditorArea* temp = static_cast<MainEditorArea*>(
         ui->tabWidget->widget(ui->tabWidget->currentIndex())
     );
     if (temp)

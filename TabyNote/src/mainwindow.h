@@ -11,7 +11,8 @@
 #include <QFileInfo>
 #include <QFile>
 
-#include "texteditortab.h"
+//#include "MainEditorArea.h"
+#include "EditorWidget/MainEditorArea.h"
 
 
 QT_BEGIN_NAMESPACE
