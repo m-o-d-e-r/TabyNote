@@ -223,9 +223,20 @@ void MainWindow::on_actionDark_triggered()
             QTextStream ts(&themeFile);
 
             qApp->setStyleSheet(ts.readAll());
+            for (int i = 0; i < ui->tabWidget->count(); i++)
+            {
+                static_cast<MainEditorArea*>(ui->tabWidget->widget(i))->setNumbarColor(
+                    "#262626",
+                    "#E2DEF3"
+                );
+            }
         }
     } else {
         qApp->setStyleSheet("");
+        for (int i = 0; i < ui->tabWidget->count(); i++)
+        {
+            static_cast<MainEditorArea*>(ui->tabWidget->widget(i))->setNumbarColor();
+        }
     }
 }
 

@@ -3,6 +3,48 @@ QMainWindow {
 	background-color: #262626;
 }
 
+QDialog {
+        background-color: #262626;
+}
+
+QPushButton {
+        background-color: #262626;
+}
+
+QLineEdit {
+        background-color: #1F1F1F;
+        color: #E2DEF3;
+}
+
+QComboBox {
+        background-color: #1F1F1F;
+        color: #E2DEF3;
+}
+
+QListView {
+        background-color: #1F1F1F;
+        color: #E2DEF3;
+}
+
+QTreeView {
+        background-color: #1F1F1F;
+        color: #E2DEF3;
+}
+
+QHeaderView {
+        background-color: #1F1F1F;
+        color: #E2DEF3;
+}
+
+QCheckBox {
+        color: #E2DEF3;
+}
+
+QGroupBox::title {
+        color: #E2DEF3;
+}
+
+
 
 /* Menu bar style */
 QMenu {
@@ -39,7 +81,7 @@ QScrollBar::sub-page:horizonal {
 QScrollBar::add-page:horizontal {
 	background: #272822;
 }
-QScrollBar:vertical{
+QScrollBar:vertical {
 	background: white;
 	width:12px;
 	margin: 0px 0px 0px 0px;
@@ -50,7 +92,7 @@ QScrollBar::handle:vertical {
 	border-radius: 5px 5px 5px 5px;
 	min-height: 30px;
 }
-QScrollBar:horizontal{
+QScrollBar:horizontal {
 	background: white;
 	height:12px;
 	margin: 0px 0px 0px 0px;
@@ -63,10 +105,10 @@ QScrollBar::handle:horizontal {
 }
 
 
-QScrollBar:vertical{
+QScrollBar:vertical {
 	background: #32332c;
 }
-QScrollBar:horizontal{
+QScrollBar:horizontal {
 	background: #32332c;
 }
 
@@ -106,6 +148,5 @@ QStatusBar {
 	color: #E2DEF3;
 }
 QLabel {
-	background-color: #1F1F1F;
 	color: #E2DEF3;
 }
