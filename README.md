@@ -11,7 +11,6 @@
 
 
 ## Next edits
-* fix some bugs with dark theme
 * fix file overview zone (add box to show current visible zone in editor workspace)
 * 'find', 'replace' tool
 * terminal
