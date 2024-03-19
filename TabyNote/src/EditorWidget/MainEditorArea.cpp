@@ -170,6 +170,20 @@ bool MainEditorArea::getStatus()
 }
 
 
+void MainEditorArea::setNumbarColor(char* bg, char* fg)
+{
+    this->bgNumbar = QColor(bg);
+    this->fgNumbar = QColor(fg);
+}
+
+
+void MainEditorArea::setNumbarColor()
+{
+    this->bgNumbar = Qt::lightGray;
+    this->fgNumbar = Qt::black;
+}
+
+
 void MainEditorArea::setSynchonizedText(QByteArray fileData)
 {
     this->textEditor->setPlainText(fileData);
@@ -261,7 +275,7 @@ int MainEditorArea::getNumbarWidgth()
         ++digits;
     }
 
-    return 3 + this->textEditor->fontMetrics().horizontalAdvance(QLatin1Char('9')) * digits;
+    return 3 + this->textEditor->fontMetrics().horizontalAdvance(QLatin1Char('9')) * (digits + 1);
 }
 
 
@@ -279,7 +293,7 @@ void MainEditorArea::updateNumBarWidget(const QRect& rect, int dy)
 void MainEditorArea::numbarPaintEvent(QPaintEvent *event)
 {
     QPainter painter(this->numBarWidget);
-    painter.fillRect(event->rect(), Qt::lightGray);
+    painter.fillRect(event->rect(), this->bgNumbar);
 
     QTextBlock block = this->textEditor->__firstVisibleBlock();
 
@@ -295,8 +309,8 @@ void MainEditorArea::numbarPaintEvent(QPaintEvent *event)
     {
         if (block.isVisible() && bottom >= event->rect().top())
         {
-            QString number = QString::number(blockNumber + 1);
-            painter.setPen(Qt::black);
+            QString number = QString::number(blockNumber + 1) + " ";
+            painter.setPen(this->fgNumbar);
             painter.drawText(
                 0,
                 top,
@@ -304,7 +318,7 @@ void MainEditorArea::numbarPaintEvent(QPaintEvent *event)
                 this->textEditor->font().pixelSize(),
 //                fontMetrics().height(),
                 Qt::AlignRight,
-                        number
+                number
             );
         }
 

@@ -18,6 +18,9 @@ class MainEditorArea : public QWidget
 {
     Q_OBJECT
 
+    QColor bgNumbar = Qt::lightGray;
+    QColor fgNumbar = Qt::black;
+
     NumBarWidget* numBarWidget;
     EditorWorkSpace* textEditor;
     FileOverViewWidget* fileOverView;
@@ -48,6 +51,9 @@ public:
 
     void setStatus(bool);
     bool getStatus();
+
+    void setNumbarColor(char*, char*);
+    void setNumbarColor();
 
     void setSynchonizedText(QByteArray);
     void setSynchonizedText();
