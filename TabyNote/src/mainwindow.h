@@ -44,6 +44,8 @@ private slots:
 
     void on_actionAbout_triggered();
 
+    void on_actionDark_triggered();
+
 private:
     void __on_all_tabs_removed();
     void __on_change_text_editor_callback();

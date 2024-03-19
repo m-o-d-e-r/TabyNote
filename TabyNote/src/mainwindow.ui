@@ -84,6 +84,9 @@
      <bold>false</bold>
     </font>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
@@ -99,6 +102,8 @@
     <property name="font">
      <font>
       <family>Fira Code Retina</family>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="title">
@@ -110,6 +115,8 @@
     <property name="font">
      <font>
       <family>Fira Code Retina</family>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="title">
@@ -250,7 +257,7 @@
   </widget>
   <action name="actionQuit">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset resource="../res.qrc">
      <normaloff>:/images/quit_icon.png</normaloff>:/images/quit_icon.png</iconset>
    </property>
    <property name="text">
@@ -267,7 +274,7 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset resource="../res.qrc">
      <normaloff>:/images/how_to_use_icon.png</normaloff>:/images/how_to_use_icon.png</iconset>
    </property>
    <property name="text">
@@ -286,7 +293,7 @@
   </action>
   <action name="actionAuthor">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset resource="../res.qrc">
      <normaloff>:/images/author_icon.png</normaloff>:/images/author_icon.png</iconset>
    </property>
    <property name="text">
@@ -295,7 +302,7 @@
   </action>
   <action name="actionSave_as">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset resource="../res.qrc">
      <normaloff>:/images/save_as_icon.png</normaloff>:/images/save_as_icon.png</iconset>
    </property>
    <property name="text">
@@ -312,7 +319,7 @@
   </action>
   <action name="actionOpen">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset resource="../res.qrc">
      <normaloff>:/images/open_icon.png</normaloff>:/images/open_icon.png</iconset>
    </property>
    <property name="text">
@@ -329,7 +336,7 @@
   </action>
   <action name="actionSave">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset resource="../res.qrc">
      <normaloff>:/images/save_icon.png</normaloff>:/images/save_icon.png</iconset>
    </property>
    <property name="text">
@@ -346,7 +353,7 @@
   </action>
   <action name="actionNew_tab">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset resource="../res.qrc">
      <normaloff>:/images/add_new_tab_icon.png</normaloff>:/images/add_new_tab_icon.png</iconset>
    </property>
    <property name="text">
@@ -368,7 +375,7 @@
   </action>
   <action name="actionClose_tab">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset resource="../res.qrc">
      <normaloff>:/images/close_tab_icon.png</normaloff>:/images/close_tab_icon.png</iconset>
    </property>
    <property name="text">
@@ -393,7 +400,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset resource="../res.qrc">
      <normaloff>:/images/turn_dark_icon.png</normaloff>:/images/turn_dark_icon.png</iconset>
    </property>
    <property name="text">
@@ -405,12 +412,12 @@
     </font>
    </property>
    <property name="shortcut">
-    <string>Alt+D</string>
+    <string>Alt+Shift+D</string>
    </property>
   </action>
  </widget>
  <resources>
-  <include location="res.qrc"/>
+  <include location="../res.qrc"/>
  </resources>
  <connections/>
 </ui>

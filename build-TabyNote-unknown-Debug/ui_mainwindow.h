@@ -148,14 +148,15 @@ public:
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 716, 21));
         menubar->setFont(font1);
+        menubar->setAutoFillBackground(true);
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuAbout = new QMenu(menubar);
         menuAbout->setObjectName(QString::fromUtf8("menuAbout"));
-        menuAbout->setFont(font);
+        menuAbout->setFont(font1);
         menuInstruments = new QMenu(menubar);
         menuInstruments->setObjectName(QString::fromUtf8("menuInstruments"));
-        menuInstruments->setFont(font);
+        menuInstruments->setFont(font1);
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -258,7 +259,7 @@ public:
 #endif // QT_CONFIG(shortcut)
         actionDark->setText(QCoreApplication::translate("MainWindow", "Dark", nullptr));
 #if QT_CONFIG(shortcut)
-        actionDark->setShortcut(QCoreApplication::translate("MainWindow", "Alt+D", nullptr));
+        actionDark->setShortcut(QCoreApplication::translate("MainWindow", "Alt+Shift+D", nullptr));
 #endif // QT_CONFIG(shortcut)
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuAbout->setTitle(QCoreApplication::translate("MainWindow", "About", nullptr));

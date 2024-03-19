@@ -1,4 +1,5 @@
 #include <QTextCursor>
+#include <QStyleFactory>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -89,7 +90,10 @@ void MainWindow::on_actionSave_as_triggered()
     TextEditorTab* currentEditor =  static_cast<TextEditorTab*>(ui->tabWidget->widget(currentIndex));
     if (!currentEditor) {return;}
 
-    QString fullPathToFile = QFileDialog::getSaveFileName();
+    QFileDialog fileDialog;
+    fileDialog.setStyleSheet("");
+
+    QString fullPathToFile = fileDialog.getSaveFileName();
     QString fileName = (new QFileInfo(fullPathToFile))->fileName();
     QFile* file = new QFile(fullPathToFile);
 
@@ -207,6 +211,24 @@ void MainWindow::on_actionAbout_triggered()
     dialog_about* about = new dialog_about;
 
     about->show();
+}
+
+
+void MainWindow::on_actionDark_triggered()
+{
+    if (ui->actionDark->isChecked())
+    {
+        QFile themeFile(":style/taby_dark.css");
+        if (themeFile.exists())
+        {
+            themeFile.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&themeFile);
+
+            qApp->setStyleSheet(ts.readAll());
+        }
+    } else {
+        qApp->setStyleSheet("");
+    }
 }
 
 
