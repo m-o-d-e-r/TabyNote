@@ -1,0 +1,140 @@
+/* QMainWindow style */
+QMainWindow {
+        background-color: #F0F0F0;
+}
+
+/* QDialog style */
+QDialog {
+        background-color: #F0F0F0;
+}
+
+/* QPushButton style */
+QPushButton {
+        background-color: #F0F0F0;
+}
+
+/* QLineEdit style */
+QLineEdit {
+        background-color: #FFFFFF;
+        color: #333333;
+}
+
+/* QComboBox style */
+QComboBox {
+        background-color: #FFFFFF;
+        color: #333333;
+}
+
+/* QListView style */
+QListView {
+        background-color: #FFFFFF;
+        color: #333333;
+}
+
+/* QTreeView style */
+QTreeView {
+        background-color: #FFFFFF;
+        color: #333333;
+}
+
+/* QHeaderView style */
+QHeaderView {
+        background-color: #FFFFFF;
+        color: #333333;
+}
+
+/* QCheckBox style */
+QCheckBox {
+        color: #333333;
+}
+
+/* QGroupBox title style */
+QGroupBox::title {
+        color: #333333;
+}
+
+/* Menu bar style */
+QMenu {
+        background-color: #E0E0E0;
+        selection-background-color: #CCCCCC;
+        color: #333333;
+}
+
+/* QMenuBar style */
+QMenuBar {
+        background-color: #FFFFFF;
+        color: #333333;
+}
+
+/* Tool bar style */
+QToolBar {
+        background-color: #F0F0F0;
+        color: #333333;
+}
+
+/* QToolButton style */
+QToolButton {
+        background-color: #F0F0F0;
+}
+
+/* QScrollBar styles */
+QScrollBar::sub-page:vertical,
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:horizontal,
+QScrollBar::add-page:horizontal {
+        background: #F0F0F0;
+}
+
+QScrollBar:vertical,
+QScrollBar:horizontal {
+        background: #FFFFFF;
+}
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal {
+        background: #CCCCCC;
+        border: 2px solid #F0F0F0;
+        border-radius: 5px;
+        min-height: 30px;
+}
+
+/* QTabWidget styles */
+QTabWidget {
+        background-color: #F0F0F0;
+}
+
+QTabBar::tab:hover {
+        padding-bottom: 7px;
+}
+
+QTabBar::tab:selected {
+        color: #333333;
+        background-color: #DDDDDD;
+}
+
+QTabBar::tab {
+        background-color: #E0E0E0;
+        color: #333333;
+}
+
+QTabBar::close-button {
+        padding-left: 5px;
+}
+
+/* Workspace editor styles */
+QPlainTextEdit,
+QTextEdit {
+        background-color: #F0F0F0;
+        color: #333333;
+}
+
+/* QStatusBar style */
+QStatusBar {
+        background-color: #FFFFFF;
+        color: #333333;
+}
+
+/* QLabel style */
+QLabel {
+        color: #333333;
+}

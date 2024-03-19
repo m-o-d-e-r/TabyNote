@@ -67,6 +67,7 @@ private:
     template<typename _TE_Object>
     void __setUp_current_line_highlighting(_TE_Object*);
     void __on_cursor_position_changed_callback();
+    void __load_theme(const char *);
 
 };
 #endif // MAINWINDOW_H

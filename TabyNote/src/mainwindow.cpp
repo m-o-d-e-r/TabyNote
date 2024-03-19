@@ -15,12 +15,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->__load_theme(":style/taby_light.css");
+
     ui->actionSave->setDisabled(true);
     ui->actionSave_as->setDisabled(true);
 
     this->statusBar()->addPermanentWidget(this->currentCurrsorPositionLabel);
     this->statusBar()->addPermanentWidget(this->currentFileNameLabel);
-    this->statusBar()->showMessage("Welcome)", 5000);
+    this->statusBar()->showMessage("Welcome)", 5000);    
 }
 
 
@@ -216,27 +218,9 @@ void MainWindow::on_actionDark_triggered()
 {
     if (ui->actionDark->isChecked())
     {
-        QFile themeFile(":style/taby_dark.css");
-        if (themeFile.exists())
-        {
-            themeFile.open(QFile::ReadOnly | QFile::Text);
-            QTextStream ts(&themeFile);
-
-            qApp->setStyleSheet(ts.readAll());
-            for (int i = 0; i < ui->tabWidget->count(); i++)
-            {
-                static_cast<MainEditorArea*>(ui->tabWidget->widget(i))->setNumbarColor(
-                    "#262626",
-                    "#E2DEF3"
-                );
-            }
-        }
+        this->__load_theme(":style/taby_dark.css");
     } else {
-        qApp->setStyleSheet("");
-        for (int i = 0; i < ui->tabWidget->count(); i++)
-        {
-            static_cast<MainEditorArea*>(ui->tabWidget->widget(i))->setNumbarColor();
-        }
+        this->__load_theme(":style/taby_light.css");
     }
 }
 
@@ -378,5 +362,18 @@ void MainWindow::__on_cursor_position_changed_callback()
                 cursor.blockNumber() + 1
             )
         );
+    }
+}
+
+
+void MainWindow::__load_theme(const char * theme_name)
+{
+    QFile themeFile(theme_name);
+    if (themeFile.exists())
+    {
+        themeFile.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&themeFile);
+
+        qApp->setStyleSheet(ts.readAll());
     }
 }

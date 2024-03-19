@@ -170,7 +170,7 @@
      <x>0</x>
      <y>0</y>
      <width>716</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="palette">
@@ -246,7 +246,6 @@
      <string>View</string>
     </property>
     <addaction name="separator"/>
-    <addaction name="actionOwn_editor_prametrs"/>
     <addaction name="separator"/>
     <addaction name="actionFilemap"/>
     <addaction name="actionRender_numbar"/>
@@ -600,7 +599,7 @@
     <string>Increase font size</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+2</string>
+    <string>Ctrl++</string>
    </property>
   </action>
   <action name="actionDecrease_font_size">
@@ -608,7 +607,7 @@
     <string>Decrease font size</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+1</string>
+    <string>Ctrl+-</string>
    </property>
   </action>
   <action name="actionWord_Wrap">
