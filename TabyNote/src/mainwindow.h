@@ -54,13 +54,18 @@ private slots:
 
     void on_actionDecrease_font_size_triggered();
 
+    void on_actionWord_Wrap_triggered(bool checked);
+
+    void on_actionRender_numbar_triggered(bool checked);
+
 signals:
 
 
 private:
     void __on_all_tabs_removed();
     void __on_change_text_editor_callback();
-    void __setUp_current_line_highlighting(QTextEdit*);
+    template<typename _TE_Object>
+    void __setUp_current_line_highlighting(_TE_Object*);
     void __on_cursor_position_changed_callback();
 
 };

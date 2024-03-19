@@ -43,6 +43,7 @@ public:
     QAction *actionOwn_editor_prametrs;
     QAction *actionIncrease_font_size;
     QAction *actionDecrease_font_size;
+    QAction *actionWord_Wrap;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
     QTabWidget *tabWidget;
@@ -139,6 +140,7 @@ public:
         actionRender_numbar = new QAction(MainWindow);
         actionRender_numbar->setObjectName(QString::fromUtf8("actionRender_numbar"));
         actionRender_numbar->setCheckable(true);
+        actionRender_numbar->setChecked(true);
         actionOpen_Terminal = new QAction(MainWindow);
         actionOpen_Terminal->setObjectName(QString::fromUtf8("actionOpen_Terminal"));
         actionFont = new QAction(MainWindow);
@@ -151,6 +153,9 @@ public:
         actionIncrease_font_size->setObjectName(QString::fromUtf8("actionIncrease_font_size"));
         actionDecrease_font_size = new QAction(MainWindow);
         actionDecrease_font_size->setObjectName(QString::fromUtf8("actionDecrease_font_size"));
+        actionWord_Wrap = new QAction(MainWindow);
+        actionWord_Wrap->setObjectName(QString::fromUtf8("actionWord_Wrap"));
+        actionWord_Wrap->setCheckable(true);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -249,7 +254,6 @@ public:
         menuInstruments->addAction(actionNew_tab);
         menuInstruments->addAction(actionClose_tab);
         menuInstruments->addSeparator();
-        menuInstruments->addAction(actionOpen_Terminal);
         menuInstruments->addSeparator();
         menuInstruments->addAction(actionIncrease_font_size);
         menuInstruments->addAction(actionDecrease_font_size);
@@ -258,6 +262,8 @@ public:
         menuView->addSeparator();
         menuView->addAction(actionFilemap);
         menuView->addAction(actionRender_numbar);
+        menuView->addSeparator();
+        menuView->addAction(actionWord_Wrap);
         menuView->addSeparator();
         menuView->addAction(actionDark);
         toolBar->addAction(actionOpen);
@@ -320,7 +326,7 @@ public:
 #if QT_CONFIG(shortcut)
         actionDark->setShortcut(QCoreApplication::translate("MainWindow", "Alt+Shift+D", nullptr));
 #endif // QT_CONFIG(shortcut)
-        actionFilemap->setText(QCoreApplication::translate("MainWindow", "Filemap (NEED FIX)", nullptr));
+        actionFilemap->setText(QCoreApplication::translate("MainWindow", "Filemap", nullptr));
         actionRender_numbar->setText(QCoreApplication::translate("MainWindow", "Render Numbar (TODO)", nullptr));
         actionOpen_Terminal->setText(QCoreApplication::translate("MainWindow", "Open Terminal (TODO)", nullptr));
         actionFont->setText(QCoreApplication::translate("MainWindow", "Font Family", nullptr));
@@ -334,6 +340,7 @@ public:
 #if QT_CONFIG(shortcut)
         actionDecrease_font_size->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+1", nullptr));
 #endif // QT_CONFIG(shortcut)
+        actionWord_Wrap->setText(QCoreApplication::translate("MainWindow", "Word Wrap", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
         menuInstruments->setTitle(QCoreApplication::translate("MainWindow", "Instruments", nullptr));

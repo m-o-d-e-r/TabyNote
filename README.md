@@ -1,16 +1,11 @@
 # TabyNote
 
 ## New 
-* Ctrl+1 to decrease font size
-* Ctrl+2 to increase font size
-* added over view file zone
-* added not working numbar)
-* added dark theme
-
+* added some new buttons
+* some fix
 
 ## Next edits
-* synchronize scrollbars between editor and file overview
-* fix new ability
+* fix file overview zone (add box to show current visible zone in editor workspace)
 * fix some bugs with dark theme
 * add numbar to editor
 * 'find', 'replace' tool
