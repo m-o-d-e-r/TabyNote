@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QFile>
 
+#include "EditorWorkSpace.h"
 #include "numbarwidget.h"
 
 
@@ -17,7 +18,8 @@ class TextEditorTab : public QWidget
     Q_OBJECT
 
     NumBarWidget* numBarWidget;
-    QPlainTextEdit* textEditor;
+    EditorWorkSpace* textEditor;
+    //    QPlainTextEdit* textEditor;
     QTextEdit* fileOverView;
     QScrollBar* textEditorScrollbar;
 
@@ -38,7 +40,7 @@ public:
 
     void packMainComponents();
 
-    const QPlainTextEdit* getTextEditor();
+    const EditorWorkSpace* getTextEditor();
     QTextEdit* getFileOverView();
 
     void setFile(QFile*);
@@ -56,9 +58,14 @@ public:
 
     void editWorkSpaceFontSize(int);
 
+    int getNumbarWidgth();
+
+    void numbarPaintEvent(QPaintEvent *event);
+
 public slots:
     void on_editorScrollBar_valueChanged();
     void textEditorCursorPositionChanged();
+    void updateNumBarWidget(const QRect &rect, int dy);
 
 };
 

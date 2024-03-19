@@ -1,19 +1,21 @@
 # TabyNote
 
 ## New 
+* added worked NumBar
 * added some new buttons
 * some fix
 
 ## Next edits
-* fix file overview zone (add box to show current visible zone in editor workspace)
+* add release history to this page
 * fix some bugs with dark theme
-* add numbar to editor
+* fix file overview zone (add box to show current visible zone in editor workspace)
 * 'find', 'replace' tool
 * terminal
 
 
 ## Window examples
 
+![](img_example/numbar.png)<hr>
 ![](img_example/over_view_zone.png)<hr>
 ![](img_example/scroll_example.png)<hr>
 ![](img_example/dark_0_1.png)<hr>

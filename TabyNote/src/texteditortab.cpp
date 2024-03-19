@@ -40,23 +40,13 @@ TextEditorTab::~TextEditorTab()
 
 void TextEditorTab::setUpNumbarWidget()
 {
-    this->numBarWidget = new NumBarWidget;
-/*        this->numBarWidget->setFixedWidth(this->fileOverView->width() * 0.3);
-    */
-    //this->numBarWidget->setPainterFont(editorWorkSpaceFont);
-    /*
-        connect(
-            this->textEditorSpace->document(),
-            &QTextDocument::blockCountChanged,
-            this->numBarWidget,
-            &NumBarWidget::setLineCount
-        );*/
+    this->numBarWidget = new NumBarWidget(this);
 }
 
 
 void TextEditorTab::setUpTextEditor()
 {
-    this->textEditor = new QPlainTextEdit;
+    this->textEditor = new EditorWorkSpace;
     QFont editorWorkSpaceFont = this->textEditor->font();
     editorWorkSpaceFont.setPixelSize(12);
     this->textEditor->setFont(editorWorkSpaceFont);
@@ -90,7 +80,7 @@ void TextEditorTab::setUpTextEditorScrollbar()
 
 void TextEditorTab::makeConnections()
 {
-
+    connect(this->textEditor, &EditorWorkSpace::updateRequest, this, &TextEditorTab::updateNumBarWidget);
     connect(
         this->textEditor,
         &QPlainTextEdit::cursorPositionChanged,
@@ -146,7 +136,7 @@ void TextEditorTab::packMainComponents()
 }
 
 
-const QPlainTextEdit* TextEditorTab::getTextEditor()
+const EditorWorkSpace* TextEditorTab::getTextEditor()
 {
     return this->textEditor;
 }
@@ -234,7 +224,7 @@ void TextEditorTab::editWorkSpaceFontSize(int deltaSize)
     currentFont.setPixelSize(currentFont.pixelSize() + deltaSize);
 
     this->textEditor->setFont(currentFont);
-//    this->numBarWidget->setPainterFont(currentFont);
+    this->numBarWidget->setFont(currentFont);
 }
 
 
@@ -259,5 +249,69 @@ void TextEditorTab::textEditorCursorPositionChanged()
         / this->textEditor->blockCount()
         * cursor.blockNumber()
     );*/
+}
+
+
+int TextEditorTab::getNumbarWidgth()
+{
+    int digits = 1;
+    int max = qMax(1, this->textEditor->blockCount());
+    while (max >= 10) {
+        max /= 10;
+        ++digits;
+    }
+
+    return 3 + this->textEditor->fontMetrics().horizontalAdvance(QLatin1Char('9')) * digits;
+}
+
+
+void TextEditorTab::updateNumBarWidget(const QRect& rect, int dy)
+{
+    if (dy)
+        this->numBarWidget->scroll(0, dy);
+    else
+        this->numBarWidget->update(0, rect.y(), this->textEditor->width(), rect.height());
+
+    this->numBarWidget->setFixedWidth(getNumbarWidgth());
+}
+
+
+void TextEditorTab::numbarPaintEvent(QPaintEvent *event)
+{
+    QPainter painter(this->numBarWidget);
+    painter.fillRect(event->rect(), Qt::lightGray);
+
+    QTextBlock block = this->textEditor->__firstVisibleBlock();
+
+    int blockNumber = block.blockNumber();
+    int top = qRound(
+        this->textEditor->__blockBoundingGeometry(block).translated(
+            this->textEditor->__contentOffset()
+        ).top()
+    );
+    int bottom = top + qRound(this->textEditor->__blockBoundingRect(block).height());
+
+    while (block.isValid() && top <= event->rect().bottom())
+    {
+        if (block.isVisible() && bottom >= event->rect().top())
+        {
+            QString number = QString::number(blockNumber + 1);
+            painter.setPen(Qt::black);
+            painter.drawText(
+                0,
+                top,
+                this->numBarWidget->width(),
+                this->textEditor->font().pixelSize(),
+//                fontMetrics().height(),
+                Qt::AlignRight,
+                        number
+            );
+        }
+
+        bottom = top + qRound(this->textEditor->__blockBoundingRect(block).height());
+        ++blockNumber;
+        block = block.next();
+        top = bottom;
+    }
 }
 
