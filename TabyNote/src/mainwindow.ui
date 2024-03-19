@@ -567,6 +567,9 @@
    <property name="text">
     <string>Filemap</string>
    </property>
+   <property name="shortcut">
+    <string>Alt+Shift+F</string>
+   </property>
   </action>
   <action name="actionRender_numbar">
    <property name="checkable">
@@ -576,22 +579,15 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Render Numbar (TODO)</string>
+    <string>Render Numbar</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Shift+N</string>
    </property>
   </action>
   <action name="actionOpen_Terminal">
    <property name="text">
     <string>Open Terminal (TODO)</string>
-   </property>
-  </action>
-  <action name="actionFont">
-   <property name="text">
-    <string>Font Family</string>
-   </property>
-  </action>
-  <action name="actionFont_Size">
-   <property name="text">
-    <string>Font Size</string>
    </property>
   </action>
   <action name="actionOwn_editor_prametrs">
@@ -621,6 +617,9 @@
    </property>
    <property name="text">
     <string>Word Wrap</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Shift+W</string>
    </property>
   </action>
  </widget>

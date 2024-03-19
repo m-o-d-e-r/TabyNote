@@ -11,6 +11,7 @@
 
 #include "EditorWorkSpace.h"
 #include "NumBarWidget.h"
+#include "FileOverViewWidget.h"
 
 
 class MainEditorArea : public QWidget
@@ -19,8 +20,7 @@ class MainEditorArea : public QWidget
 
     NumBarWidget* numBarWidget;
     EditorWorkSpace* textEditor;
-    //    QPlainTextEdit* textEditor;
-    QTextEdit* fileOverView;
+    FileOverViewWidget* fileOverView;
     QScrollBar* textEditorScrollbar;
 
     QFile* file = nullptr;
@@ -41,7 +41,7 @@ public:
     void packMainComponents();
 
     const EditorWorkSpace* getTextEditor();
-    QTextEdit* getFileOverView();
+    FileOverViewWidget* getFileOverView();
 
     void setFile(QFile*);
     QFile* getFile();

@@ -56,7 +56,7 @@ void MainEditorArea::setUpTextEditor()
 
 void MainEditorArea::setUpFileOverViewWidget()
 {
-    this->fileOverView = new QTextEdit;
+    this->fileOverView = new FileOverViewWidget;
     this->fileOverView->setEnabled(false);
     QFont overViewtFont = this->fileOverView->currentFont();
     overViewtFont.setPixelSize(3);
@@ -142,7 +142,7 @@ const EditorWorkSpace* MainEditorArea::getTextEditor()
 }
 
 
-QTextEdit* MainEditorArea::getFileOverView()
+FileOverViewWidget* MainEditorArea::getFileOverView()
 {
     return this->fileOverView;
 }
@@ -313,5 +313,11 @@ void MainEditorArea::numbarPaintEvent(QPaintEvent *event)
         block = block.next();
         top = bottom;
     }
+
+    this->fileOverView->setEditorWorkSpaceRect(
+        this->textEditor->textCursor().blockNumber(),
+        this->textEditor->font().pixelSize()
+        / this->fileOverView->font().pixelSize()
+    );
 }
 
