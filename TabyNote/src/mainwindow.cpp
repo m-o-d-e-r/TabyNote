@@ -208,7 +208,6 @@ void MainWindow::on_actionQuit_triggered()
 void MainWindow::on_actionAbout_triggered()
 {
     dialog_about* about = new dialog_about;
-    about->setStyleSheet("");
 
     about->show();
 }
@@ -222,19 +221,6 @@ void MainWindow::on_actionDark_triggered()
     } else {
         this->__load_theme(":style/taby_light.css");
     }
-}
-
-
-
-void MainWindow::on_actionOwn_editor_prametrs_triggered()
-{
-    bool isOk;
-
-    QFont customFont = QFontDialog::getFont(&isOk);
-    if (isOk)
-        qApp->setFont(customFont);
-    else
-        this->statusBar()->showMessage("Can't set font options(");
 }
 
 
@@ -304,10 +290,6 @@ void MainWindow::__on_change_text_editor_callback()
     if (!editor) {return;}
 
     editor->setSynchonizedText();
-    /*
-    editor->editWorkSpaceFontSize(1);
-    editor->editWorkSpaceFontSize(-1);*/
-
 
     if (editor->getStatus())
     {

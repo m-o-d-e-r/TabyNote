@@ -46,8 +46,6 @@ private slots:
 
     void on_actionDark_triggered();
 
-    void on_actionOwn_editor_prametrs_triggered();
-
     void on_actionFilemap_triggered(bool checked);
 
     void on_actionIncrease_font_size_triggered();
