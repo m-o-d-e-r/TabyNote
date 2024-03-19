@@ -197,10 +197,10 @@ void MainEditorArea::textEditorChangeWrapMode(bool isChecked)
     if (isChecked)
     {
         this->textEditor->setWordWrapMode(QTextOption::WrapAnywhere);
-        this->fileOverView->setWordWrapMode(QTextOption::WrapAnywhere);
+//        this->fileOverView->setWordWrapMode(QTextOption::WrapAnywhere);
     } else {
         this->textEditor->setWordWrapMode(QTextOption::NoWrap);
-        this->fileOverView->setWordWrapMode(QTextOption::NoWrap);
+//        this->fileOverView->setWordWrapMode(QTextOption::NoWrap);
     }
 }
 

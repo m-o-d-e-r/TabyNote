@@ -12,7 +12,7 @@ class FileOverViewWidget: public QTextEdit
     double difference;
 
 public:
-    FileOverViewWidget() {}
+    FileOverViewWidget() { setWordWrapMode(QTextOption::WrapAnywhere); }
 
     void setEditorWorkSpaceRect(int, double);
 };
