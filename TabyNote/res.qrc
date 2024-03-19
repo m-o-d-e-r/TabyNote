@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/turn_dark_icon.png</file>
+        <file>images/save_icon.png</file>
+        <file>images/save_as_icon.png</file>
+        <file>images/quit_icon.png</file>
+        <file>images/open_icon.png</file>
+        <file>images/how_to_use_icon.png</file>
+        <file>images/close_tab_icon.png</file>
+        <file>images/author_icon.png</file>
+        <file>images/add_new_tab_icon.png</file>
+    </qresource>
+</RCC>
