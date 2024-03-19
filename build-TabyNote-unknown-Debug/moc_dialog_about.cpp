@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../TabyNote/dialog_about.h"
+#include "../TabyNote/src/dialog_about.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
