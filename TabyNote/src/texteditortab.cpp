@@ -3,7 +3,7 @@
 
 TextEditorTab::TextEditorTab() {}
 
-TextEditorTab::TextEditorTab(QFile* file_, bool saved) : file(file_), isSaved(saved) {}
+TextEditorTab::TextEditorTab(QFile* file_, bool saved): file(file_), isSaved(saved) {}
 
 TextEditorTab::~TextEditorTab()
 {

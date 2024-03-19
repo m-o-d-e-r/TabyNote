@@ -1,4 +1,4 @@
-#include <QDialog>
+#include <QTextCursor>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -14,11 +14,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionSave->setDisabled(true);
     ui->actionSave_as->setDisabled(true);
 
+    this->statusBar()->addPermanentWidget(this->currentCurrsorPositionLabel);
     this->statusBar()->addPermanentWidget(this->currentFileNameLabel);
     this->statusBar()->showMessage("Welcome)");
 }
 
 MainWindow::~MainWindow() {
+    delete currentCurrsorPositionLabel;
     delete currentFileNameLabel;
     delete ui;
 }
@@ -44,6 +46,13 @@ void MainWindow::on_actionOpen_triggered()
             MainWindow::__on_change_text_editor_callback();
         }
     );
+    connect(currentEditor, &TextEditorTab::cursorPositionChanged, this,
+        [&]()
+        {
+            MainWindow::__on_cursor_position_changed_callback();
+        }
+    );
+
 
     currentEditor->setText(file->readAll());
 
@@ -111,6 +120,13 @@ void MainWindow::on_actionNew_tab_triggered()
             MainWindow::__on_change_text_editor_callback();
         }
     );
+    connect(tabEditor, &TextEditorTab::cursorPositionChanged, this,
+        [&]()
+        {
+            MainWindow::__on_cursor_position_changed_callback();
+        }
+    );
+
     ui->tabWidget->addTab(tabEditor, "* Unsaved");
 }
 
@@ -195,5 +211,22 @@ void MainWindow::__on_change_text_editor_callback()
             "* " + ui->tabWidget->tabText(currentIndex)
         );
         editor->setStatus(false);
+    }
+}
+
+void MainWindow::__on_cursor_position_changed_callback()
+{
+    TextEditorTab* editor = static_cast<TextEditorTab*>(sender());
+
+    if (editor)
+    {
+        QString cursorPositionString = "Pos: (%1, %2)";
+        QTextCursor cursor = editor->textCursor();
+
+        currentCurrsorPositionLabel->setText(
+            cursorPositionString.arg(cursor.columnNumber()).arg(
+                cursor.blockNumber()
+            )
+        );
     }
 }

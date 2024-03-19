@@ -23,6 +23,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
     Ui::MainWindow *ui;
+    QLabel* currentCurrsorPositionLabel = new QLabel("Pos: (None, None)");
     QLabel* currentFileNameLabel = new QLabel("File name: None");
 
 public:
@@ -46,6 +47,7 @@ private slots:
 private:
     void __on_all_tabs_removed();
     void __on_change_text_editor_callback();
+    void __on_cursor_position_changed_callback();
 
 };
 #endif // MAINWINDOW_H
