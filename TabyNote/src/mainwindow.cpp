@@ -6,6 +6,8 @@
 #include "ui_mainwindow.h"
 #include "dialog_about.h"
 
+#include "EditorWidget/MainEditorArea.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,10 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionSave->setDisabled(true);
     ui->actionSave_as->setDisabled(true);
 
-//    this->statusBar()->setStyleSheet("color: #3B675B;");
     this->statusBar()->addPermanentWidget(this->currentCurrsorPositionLabel);
     this->statusBar()->addPermanentWidget(this->currentFileNameLabel);
-    this->statusBar()->showMessage("Welcome)");
+    this->statusBar()->showMessage("Welcome)", 5000);
 }
 
 
@@ -34,7 +35,6 @@ MainWindow::~MainWindow() {
 void MainWindow::on_actionOpen_triggered()
 {
     QString fullPathToFile = QFileDialog::getOpenFileName();
-    QString fileName = (new QFileInfo(fullPathToFile))->fileName();
     QFile* file = new QFile(fullPathToFile);
 
     if (!file->open(QIODevice::Text | QIODevice::ReadWrite))
@@ -72,10 +72,11 @@ void MainWindow::on_actionOpen_triggered()
     currentEditor->setSynchonizedText(file->readAll());
 
 
+    QString fileName = (new QFileInfo(fullPathToFile))->fileName();
     ui->tabWidget->addTab(currentEditor, fileName);
     ui->tabWidget->setCurrentIndex(ui->tabWidget->count()-1);
 
-    this->statusBar()->showMessage("File opened");
+    this->statusBar()->showMessage("File opened", 5000);
     this->currentFileNameLabel->setText("File name: " + fileName);
 }
 
@@ -92,7 +93,6 @@ void MainWindow::on_actionSave_as_triggered()
     fileDialog.setStyleSheet("");
 
     QString fullPathToFile = fileDialog.getSaveFileName();
-    QString fileName = (new QFileInfo(fullPathToFile))->fileName();
     QFile* file = new QFile(fullPathToFile);
 
     if (file->open(QIODevice::Text | QIODevice::ReadWrite))
@@ -106,7 +106,7 @@ void MainWindow::on_actionSave_as_triggered()
 
     currentEditor->setStatus(true);
     currentEditor->setFile(file);
-    ui->tabWidget->setTabText(currentIndex, fileName);
+    ui->tabWidget->setTabText(currentIndex, (new QFileInfo(fullPathToFile))->fileName());
 }
 
 

@@ -315,8 +315,7 @@ void MainEditorArea::numbarPaintEvent(QPaintEvent *event)
                 0,
                 top,
                 this->numBarWidget->width(),
-                this->textEditor->font().pixelSize(),
-//                fontMetrics().height(),
+                this->textEditor->fontMetrics().height(),
                 Qt::AlignRight,
                 number
             );

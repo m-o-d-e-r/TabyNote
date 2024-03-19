@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>489</width>
+    <width>492</width>
     <height>415</height>
    </rect>
   </property>
@@ -31,7 +31,6 @@
   <property name="font">
    <font>
     <family>Fira Code Retina</family>
-    <weight>50</weight>
     <bold>false</bold>
    </font>
   </property>
@@ -175,7 +174,7 @@
              <enum>QFrame::StyledPanel</enum>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;My first Qt Project.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Made just for fun and learning Qt.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Telegram: @M_O_D_E_R&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Icons from: https://icons8.com/&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;🥹🫶🥹&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;My first Qt Project.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Made just for fun and learning Qt.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Telegram: @M_O_D_E_R&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Icons from: https://icons8.com/&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;🥹🫶🥹&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="textFormat">
              <enum>Qt::AutoText</enum>
