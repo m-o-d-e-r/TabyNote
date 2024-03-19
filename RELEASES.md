@@ -2,6 +2,9 @@
 ## Release history
 
 
+* **[2022-11-01]** :arrow_right: Dark theme 1.0 <br>
+  Fix some bugs with dark theme.
+
 * **[2022-10-30]** :arrow_right: Code reorganization <br>
   I needed to improve the readability of the code, so I decided to do a little refactoring.
 
