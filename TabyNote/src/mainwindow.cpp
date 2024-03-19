@@ -92,11 +92,15 @@ void MainWindow::on_actionSave_as_triggered()
     if (!currentEditor) {return;}
 
     QFileDialog fileDialog;
-    fileDialog.setStyleSheet("");
 
     QString fullPathToFile = fileDialog.getSaveFileName();
-    QFile* file = new QFile(fullPathToFile);
+    if (fullPathToFile == "")
+    {
+        this->ui->statusbar->showMessage("Invalid file name", 5000);
+        return;
+    }
 
+    QFile* file = new QFile(fullPathToFile);
     if (file->open(QIODevice::Text | QIODevice::ReadWrite))
     {
         QTextStream fileStream(file);

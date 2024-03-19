@@ -170,20 +170,6 @@ bool MainEditorArea::getStatus()
 }
 
 
-void MainEditorArea::setNumbarColor(char* bg, char* fg)
-{
-    this->bgNumbar = QColor(bg);
-    this->fgNumbar = QColor(fg);
-}
-
-
-void MainEditorArea::setNumbarColor()
-{
-    this->bgNumbar = Qt::lightGray;
-    this->fgNumbar = Qt::black;
-}
-
-
 void MainEditorArea::setSynchonizedText(QByteArray fileData)
 {
     this->textEditor->setPlainText(fileData);

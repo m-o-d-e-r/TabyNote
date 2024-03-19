@@ -52,9 +52,6 @@ public:
     void setStatus(bool);
     bool getStatus();
 
-    void setNumbarColor(char*, char*);
-    void setNumbarColor();
-
     void setSynchonizedText(QByteArray);
     void setSynchonizedText();
 
