@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->__load_theme(":style/taby_light.css");
+    this->__load_theme(":style/taby_dark.css");
 
     ui->actionSave->setDisabled(true);
     ui->actionSave_as->setDisabled(true);
