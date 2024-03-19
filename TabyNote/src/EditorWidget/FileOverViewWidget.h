@@ -12,11 +12,9 @@ class FileOverViewWidget: public QTextEdit
     double difference;
 
 public:
-    FileOverViewWidget();
+    FileOverViewWidget() {}
 
     void setEditorWorkSpaceRect(int, double);
-    void paintEvent(QPaintEvent*) override;
-
 };
 
 #endif // FILEOVERVIEWWIDGET_H
