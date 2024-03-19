@@ -12,13 +12,13 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolBar>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -35,13 +35,20 @@ public:
     QAction *actionNew_tab;
     QAction *actionClose_tab;
     QAction *actionDark;
+    QAction *actionFilemap;
+    QAction *actionRender_numbar;
+    QAction *actionOpen_Terminal;
+    QAction *actionFont;
+    QAction *actionFont_Size;
+    QAction *actionOwn_editor_prametrs;
     QWidget *centralwidget;
-    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
     QTabWidget *tabWidget;
     QMenuBar *menubar;
     QMenu *menuFile;
-    QMenu *menuAbout;
+    QMenu *menuHelp;
     QMenu *menuInstruments;
+    QMenu *menuView;
     QStatusBar *statusbar;
     QToolBar *toolBar;
 
@@ -56,25 +63,16 @@ public:
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setMinimumSize(QSize(716, 485));
-        QFont font;
-        font.setFamily(QString::fromUtf8("Fira Code Retina"));
-        MainWindow->setFont(font);
         actionQuit = new QAction(MainWindow);
         actionQuit->setObjectName(QString::fromUtf8("actionQuit"));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/images/quit_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionQuit->setIcon(icon);
-        actionQuit->setFont(font);
         actionAbout = new QAction(MainWindow);
         actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/images/how_to_use_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionAbout->setIcon(icon1);
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Fira Code Retina"));
-        font1.setBold(false);
-        font1.setWeight(50);
-        actionAbout->setFont(font1);
         actionAuthor = new QAction(MainWindow);
         actionAuthor->setObjectName(QString::fromUtf8("actionAuthor"));
         QIcon icon2;
@@ -85,40 +83,46 @@ public:
         QIcon icon3;
         icon3.addFile(QString::fromUtf8(":/images/save_as_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionSave_as->setIcon(icon3);
-        actionSave_as->setFont(font);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QString::fromUtf8("actionOpen"));
         QIcon icon4;
         icon4.addFile(QString::fromUtf8(":/images/open_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionOpen->setIcon(icon4);
-        actionOpen->setFont(font);
         actionSave = new QAction(MainWindow);
         actionSave->setObjectName(QString::fromUtf8("actionSave"));
         QIcon icon5;
         icon5.addFile(QString::fromUtf8(":/images/save_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionSave->setIcon(icon5);
-        actionSave->setFont(font);
         actionNew_tab = new QAction(MainWindow);
         actionNew_tab->setObjectName(QString::fromUtf8("actionNew_tab"));
         QIcon icon6;
         icon6.addFile(QString::fromUtf8(":/images/add_new_tab_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionNew_tab->setIcon(icon6);
-        actionNew_tab->setFont(font1);
         actionClose_tab = new QAction(MainWindow);
         actionClose_tab->setObjectName(QString::fromUtf8("actionClose_tab"));
         QIcon icon7;
         icon7.addFile(QString::fromUtf8(":/images/close_tab_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionClose_tab->setIcon(icon7);
-        actionClose_tab->setFont(font1);
         actionDark = new QAction(MainWindow);
         actionDark->setObjectName(QString::fromUtf8("actionDark"));
         actionDark->setCheckable(true);
         QIcon icon8;
         icon8.addFile(QString::fromUtf8(":/images/turn_dark_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionDark->setIcon(icon8);
-        QFont font2;
-        font2.setFamily(QString::fromUtf8("Fira Code"));
-        actionDark->setFont(font2);
+        actionFilemap = new QAction(MainWindow);
+        actionFilemap->setObjectName(QString::fromUtf8("actionFilemap"));
+        actionFilemap->setCheckable(true);
+        actionRender_numbar = new QAction(MainWindow);
+        actionRender_numbar->setObjectName(QString::fromUtf8("actionRender_numbar"));
+        actionRender_numbar->setCheckable(true);
+        actionOpen_Terminal = new QAction(MainWindow);
+        actionOpen_Terminal->setObjectName(QString::fromUtf8("actionOpen_Terminal"));
+        actionFont = new QAction(MainWindow);
+        actionFont->setObjectName(QString::fromUtf8("actionFont"));
+        actionFont_Size = new QAction(MainWindow);
+        actionFont_Size->setObjectName(QString::fromUtf8("actionFont_Size"));
+        actionOwn_editor_prametrs = new QAction(MainWindow);
+        actionOwn_editor_prametrs->setObjectName(QString::fromUtf8("actionOwn_editor_prametrs"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -126,8 +130,8 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(centralwidget->sizePolicy().hasHeightForWidth());
         centralwidget->setSizePolicy(sizePolicy1);
-        verticalLayout = new QVBoxLayout(centralwidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout = new QHBoxLayout(centralwidget);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         QSizePolicy sizePolicy2(QSizePolicy::Ignored, QSizePolicy::Expanding);
@@ -141,22 +145,22 @@ public:
         tabWidget->setMovable(true);
         tabWidget->setTabBarAutoHide(false);
 
-        verticalLayout->addWidget(tabWidget);
+        horizontalLayout->addWidget(tabWidget);
 
+        horizontalLayout->setStretch(0, 1);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 716, 21));
-        menubar->setFont(font1);
+        menubar->setGeometry(QRect(0, 0, 716, 20));
         menubar->setAutoFillBackground(true);
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
-        menuAbout = new QMenu(menubar);
-        menuAbout->setObjectName(QString::fromUtf8("menuAbout"));
-        menuAbout->setFont(font1);
+        menuHelp = new QMenu(menubar);
+        menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
         menuInstruments = new QMenu(menubar);
         menuInstruments->setObjectName(QString::fromUtf8("menuInstruments"));
-        menuInstruments->setFont(font1);
+        menuView = new QMenu(menubar);
+        menuView->setObjectName(QString::fromUtf8("menuView"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -168,7 +172,7 @@ public:
         QBrush brush1(QColor(255, 255, 255, 255));
         brush1.setStyle(Qt::SolidPattern);
         palette.setBrush(QPalette::Active, QPalette::Base, brush1);
-        QBrush brush2(QColor(217, 246, 255, 255));
+        QBrush brush2(QColor(28, 164, 255, 255));
         brush2.setStyle(Qt::SolidPattern);
         palette.setBrush(QPalette::Active, QPalette::Window, brush2);
         palette.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
@@ -180,27 +184,35 @@ public:
         palette.setBrush(QPalette::Disabled, QPalette::Base, brush2);
         palette.setBrush(QPalette::Disabled, QPalette::Window, brush2);
         statusbar->setPalette(palette);
-        statusbar->setFont(font);
         statusbar->setAutoFillBackground(true);
+        statusbar->setSizeGripEnabled(true);
         MainWindow->setStatusBar(statusbar);
         toolBar = new QToolBar(MainWindow);
         toolBar->setObjectName(QString::fromUtf8("toolBar"));
         MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menubar->addAction(menuFile->menuAction());
+        menubar->addAction(menuView->menuAction());
         menubar->addAction(menuInstruments->menuAction());
-        menubar->addAction(menuAbout->menuAction());
+        menubar->addAction(menuHelp->menuAction());
         menuFile->addAction(actionOpen);
         menuFile->addSeparator();
         menuFile->addAction(actionSave);
         menuFile->addAction(actionSave_as);
         menuFile->addSeparator();
         menuFile->addAction(actionQuit);
-        menuAbout->addAction(actionAbout);
+        menuHelp->addAction(actionAbout);
         menuInstruments->addAction(actionNew_tab);
         menuInstruments->addAction(actionClose_tab);
         menuInstruments->addSeparator();
-        menuInstruments->addAction(actionDark);
+        menuInstruments->addAction(actionOpen_Terminal);
+        menuView->addSeparator();
+        menuView->addAction(actionOwn_editor_prametrs);
+        menuView->addSeparator();
+        menuView->addAction(actionFilemap);
+        menuView->addAction(actionRender_numbar);
+        menuView->addSeparator();
+        menuView->addAction(actionDark);
         toolBar->addAction(actionOpen);
         toolBar->addSeparator();
         toolBar->addAction(actionSave);
@@ -226,7 +238,7 @@ public:
 #if QT_CONFIG(shortcut)
         actionQuit->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+Q", nullptr));
 #endif // QT_CONFIG(shortcut)
-        actionAbout->setText(QCoreApplication::translate("MainWindow", "\\_(-_-)_/", nullptr));
+        actionAbout->setText(QCoreApplication::translate("MainWindow", "About", nullptr));
 #if QT_CONFIG(shortcut)
         actionAbout->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+H", nullptr));
 #endif // QT_CONFIG(shortcut)
@@ -261,9 +273,16 @@ public:
 #if QT_CONFIG(shortcut)
         actionDark->setShortcut(QCoreApplication::translate("MainWindow", "Alt+Shift+D", nullptr));
 #endif // QT_CONFIG(shortcut)
+        actionFilemap->setText(QCoreApplication::translate("MainWindow", "Filemap (TODO)", nullptr));
+        actionRender_numbar->setText(QCoreApplication::translate("MainWindow", "Render Numbar (TODO)", nullptr));
+        actionOpen_Terminal->setText(QCoreApplication::translate("MainWindow", "Open Terminal (TODO)", nullptr));
+        actionFont->setText(QCoreApplication::translate("MainWindow", "Font Family", nullptr));
+        actionFont_Size->setText(QCoreApplication::translate("MainWindow", "Font Size", nullptr));
+        actionOwn_editor_prametrs->setText(QCoreApplication::translate("MainWindow", "TabyNote global font", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
-        menuAbout->setTitle(QCoreApplication::translate("MainWindow", "About", nullptr));
+        menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
         menuInstruments->setTitle(QCoreApplication::translate("MainWindow", "Instruments", nullptr));
+        menuView->setTitle(QCoreApplication::translate("MainWindow", "View", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi
 
