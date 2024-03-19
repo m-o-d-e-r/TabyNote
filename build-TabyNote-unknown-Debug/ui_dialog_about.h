@@ -95,6 +95,8 @@ public:
         verticalLayout_3->setContentsMargins(0, -1, -1, -1);
         label_2 = new QLabel(verticalWidget_1);
         label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setFrameShape(QFrame::StyledPanel);
+        label_2->setTextFormat(Qt::AutoText);
 
         verticalLayout_3->addWidget(label_2);
 
@@ -109,7 +111,9 @@ public:
         verticalLayout_4->setContentsMargins(1, -1, -1, -1);
         label = new QLabel(verticalWidget_2);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setTextFormat(Qt::MarkdownText);
+        label->setFrameShape(QFrame::StyledPanel);
+        label->setTextFormat(Qt::AutoText);
+        label->setScaledContents(false);
         label->setOpenExternalLinks(true);
 
         verticalLayout_4->addWidget(label);

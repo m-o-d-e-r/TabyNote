@@ -33,14 +33,32 @@ void MainWindow::on_actionOpen_triggered()
     QString fileName = (new QFileInfo(fullPathToFile))->fileName();
     QFile* file = new QFile(fullPathToFile);
 
+/*
+    TextEditorTab* editor = nullptr;
+    for (int i = 0; i < ui->tabWidget->count(); i++)
+    {
+        editor =  static_cast<TextEditorTab*>(ui->tabWidget->widget(i));
+        if (editor)
+        {
+            QFileInfo editorFileInfo(editor->getFile()->fileName());
+            qDebug(editorFileInfo.fileName().toLocal8Bit().data());
+        } else
+        {
+            qDebug("error");
+        }
+        editor = nullptr;
+    }*/
+
+
     if (!file->open(QIODevice::Text | QIODevice::ReadWrite))
     {
-        this->statusBar()->showMessage("Can't open this file...");
+        this->statusBar()->showMessage("Can't open file...");
         return;
     }
 
     TextEditorTab* currentEditor = new TextEditorTab(file, true);
-    connect(currentEditor, &TextEditorTab::textChanged,
+    currentEditor->blockSignals(true);
+    connect(currentEditor, &TextEditorTab::textChanged, this,
         [&]()
         {
             MainWindow::__on_change_text_editor_callback();
@@ -57,6 +75,7 @@ void MainWindow::on_actionOpen_triggered()
     currentEditor->setText(file->readAll());
 
     ui->tabWidget->addTab(currentEditor, fileName);
+    ui->tabWidget->setCurrentIndex(ui->tabWidget->count()-1);
 
     this->statusBar()->showMessage("File opened");
     this->currentFileNameLabel->setText("File name: " + fileName);
@@ -114,7 +133,7 @@ void MainWindow::on_actionNew_tab_triggered()
 {
     TextEditorTab* tabEditor = new TextEditorTab;
 //    tabEditor->setStyleSheet(*(new QString("background-color: #191e24; color: #90bcd2")));
-    connect(tabEditor, &TextEditorTab::textChanged,
+    connect(tabEditor, &TextEditorTab::textChanged, this,
         [&]()
         {
             MainWindow::__on_change_text_editor_callback();
@@ -128,12 +147,16 @@ void MainWindow::on_actionNew_tab_triggered()
     );
 
     ui->tabWidget->addTab(tabEditor, "* Unsaved");
+    ui->tabWidget->setCurrentIndex(ui->tabWidget->count()-1);
 }
 
 void MainWindow::on_actionClose_tab_triggered()
 {
     int currentIndex = ui->tabWidget->currentIndex();
-    on_tabWidget_tabCloseRequested(currentIndex);
+    if (currentIndex >= 0)
+    {
+        on_tabWidget_tabCloseRequested(currentIndex);
+    }
 }
 
 void MainWindow::on_tabWidget_tabCloseRequested(int index)
