@@ -3,12 +3,12 @@
 #include <QPainter>
 #include <QRect>
 
-#include "numbarwidget.h"
-#include "texteditortab.h"
+#include "NumBarWidget.h"
+#include "MainEditorArea.h"
 #include "EditorWorkSpace.h"
 
 
-NumBarWidget::NumBarWidget(TextEditorTab* editor)
+NumBarWidget::NumBarWidget(MainEditorArea* editor)
 {
     this->editor = editor;
 }

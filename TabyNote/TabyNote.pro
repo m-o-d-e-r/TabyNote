@@ -9,18 +9,18 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/EditorWidget/MainEditorArea.cpp \
+    src/EditorWidget/NumBarWidget.cpp \
     src/dialog_about.cpp \
     src/main.cpp \
-    src/mainwindow.cpp \
-    src/numbarwidget.cpp \
-    src/texteditortab.cpp
+    src/mainwindow.cpp
 
 HEADERS += \
-    src/EditorWorkSpace.h \
+    src/EditorWidget/EditorWorkSpace.h \
+    src/EditorWidget/MainEditorArea.h \
+    src/EditorWidget/NumBarWidget.h \
     src/dialog_about.h \
-    src/mainwindow.h \
-    src/numbarwidget.h \
-    src/texteditortab.h
+    src/mainwindow.h
 
 FORMS += \
     src/dialog_about.ui \

@@ -1,5 +1,5 @@
-#ifndef TEXTEDITORTAB_H
-#define TEXTEDITORTAB_H
+#ifndef MAINEDITORAREA_H
+#define MAINEDITORAREA_H
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -10,10 +10,10 @@
 #include <QFile>
 
 #include "EditorWorkSpace.h"
-#include "numbarwidget.h"
+#include "NumBarWidget.h"
 
 
-class TextEditorTab : public QWidget
+class MainEditorArea : public QWidget
 {
     Q_OBJECT
 
@@ -27,9 +27,9 @@ class TextEditorTab : public QWidget
     bool isSaved = false;
 
 public:
-    TextEditorTab();
-    TextEditorTab(QFile*, bool);
-    ~TextEditorTab();
+    MainEditorArea();
+    MainEditorArea(QFile*, bool);
+    ~MainEditorArea();
 
     void setUpNumbarWidget();
     void setUpTextEditor();
@@ -69,4 +69,4 @@ public slots:
 
 };
 
-#endif // TEXTEDITORTAB_H
+#endif // MAINEDITORAREA_H
