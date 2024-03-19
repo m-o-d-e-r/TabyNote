@@ -48,9 +48,19 @@ private slots:
 
     void on_actionOwn_editor_prametrs_triggered();
 
+    void on_actionFilemap_triggered(bool checked);
+
+    void on_actionIncrease_font_size_triggered();
+
+    void on_actionDecrease_font_size_triggered();
+
+signals:
+
+
 private:
     void __on_all_tabs_removed();
     void __on_change_text_editor_callback();
+    void __setUp_current_line_highlighting(QTextEdit*);
     void __on_cursor_position_changed_callback();
 
 };

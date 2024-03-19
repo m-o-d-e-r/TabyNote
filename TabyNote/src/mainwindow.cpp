@@ -16,10 +16,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionSave->setDisabled(true);
     ui->actionSave_as->setDisabled(true);
 
+//    this->statusBar()->setStyleSheet("color: #3B675B;");
     this->statusBar()->addPermanentWidget(this->currentCurrsorPositionLabel);
     this->statusBar()->addPermanentWidget(this->currentFileNameLabel);
     this->statusBar()->showMessage("Welcome)");
 }
+
 
 MainWindow::~MainWindow() {
     delete currentCurrsorPositionLabel;
@@ -42,23 +44,35 @@ void MainWindow::on_actionOpen_triggered()
     }
 
     TextEditorTab* currentEditor = new TextEditorTab(file, true);
-//    currentEditor->getEditorWorkSpace()->blockSignals(true);
+    if (ui->tabWidget->count() > 0)
+    {
+        TextEditorTab* firstTabEditorWidget = static_cast<TextEditorTab*>(ui->tabWidget->widget(0));
+        if (firstTabEditorWidget)
+        {
+            QFont currentFont = currentEditor->getEditorSpace()->currentFont();
+            currentFont.setPixelSize(
+                firstTabEditorWidget->getEditorSpace()->currentFont().pixelSize()
+            );
+            currentEditor->getEditorSpace()->setFont(currentFont);
+        }
+    }
+    if (ui->actionFilemap->isChecked())
+        currentEditor->getFileOverView()->show();
+    else
+        currentEditor->getFileOverView()->hide();
 
-    connect(currentEditor->getEditorSpace(), &QTextEdit::textChanged, this,
-        [&]()
-        {
-            MainWindow::__on_change_text_editor_callback();
-        }
+    connect(
+        currentEditor->getEditorSpace(), &QTextEdit::textChanged, this,
+        [&]() {MainWindow::__on_change_text_editor_callback();}
     );
-    connect(currentEditor->getEditorSpace(), &QTextEdit::cursorPositionChanged, this,
-        [&]()
-        {
-            MainWindow::__on_cursor_position_changed_callback();
-        }
+    connect(
+        currentEditor->getEditorSpace(), &QTextEdit::cursorPositionChanged, this,
+        [&]() {MainWindow::__on_cursor_position_changed_callback();}
     );
 
 
     currentEditor->getEditorSpace()->setText(file->readAll());
+    currentEditor->getFileOverView()->setText(currentEditor->getEditorSpace()->toPlainText());
 
     ui->tabWidget->addTab(currentEditor, fileName);
     ui->tabWidget->setCurrentIndex(ui->tabWidget->count()-1);
@@ -66,6 +80,7 @@ void MainWindow::on_actionOpen_triggered()
     this->statusBar()->showMessage("File opened");
     this->currentFileNameLabel->setText("File name: " + fileName);
 }
+
 
 
 void MainWindow::on_actionSave_as_triggered()
@@ -96,6 +111,7 @@ void MainWindow::on_actionSave_as_triggered()
     ui->tabWidget->setTabText(currentIndex, fileName);
 }
 
+
 void MainWindow::on_actionSave_triggered()
 {
     int currentIndex = ui->tabWidget->currentIndex();
@@ -114,28 +130,30 @@ void MainWindow::on_actionSave_triggered()
 }
 
 
+
 // operations with tabs
 void MainWindow::on_actionNew_tab_triggered()
 {
     TextEditorTab* tabEditor = new TextEditorTab;
+    if (ui->actionFilemap->isChecked())
+        tabEditor->getFileOverView()->show();
+    else
+        tabEditor->getFileOverView()->hide();
 
     //    tabEditor->setStyleSheet(*(new QString("background-color: #191e24; color: #90bcd2")));
-    connect(tabEditor->getEditorSpace(), &QTextEdit::textChanged, this,
-        [&]()
-        {
-            MainWindow::__on_change_text_editor_callback();
-        }
+    connect(
+        tabEditor->getEditorSpace(), &QTextEdit::textChanged, this,
+        [&]() {MainWindow::__on_change_text_editor_callback();}
     );
-    connect(tabEditor->getEditorSpace(), &QTextEdit::cursorPositionChanged, this,
-        [&]()
-        {
-            MainWindow::__on_cursor_position_changed_callback();
-        }
+    connect(
+        tabEditor->getEditorSpace(), &QTextEdit::cursorPositionChanged, this,
+        [&]() {MainWindow::__on_cursor_position_changed_callback();}
     );
 
     ui->tabWidget->addTab(tabEditor, "* Unsaved");
     ui->tabWidget->setCurrentIndex(ui->tabWidget->count()-1);
 }
+
 
 void MainWindow::on_actionClose_tab_triggered()
 {
@@ -145,6 +163,7 @@ void MainWindow::on_actionClose_tab_triggered()
         on_tabWidget_tabCloseRequested(currentIndex);
     }
 }
+
 
 void MainWindow::on_tabWidget_tabCloseRequested(int index)
 {
@@ -158,6 +177,7 @@ void MainWindow::on_tabWidget_tabCloseRequested(int index)
     }
 }
 
+
 void MainWindow::on_tabWidget_currentChanged(int index)
 {
     QString newTitle = "Taby note(%1): %2";
@@ -170,9 +190,7 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     {
         ui->actionSave->setDisabled(false);
         ui->actionSave_as->setDisabled(true);
-    }
-    else
-    {
+    } else {
         ui->actionSave->setDisabled(true);
         ui->actionSave_as->setDisabled(false);
     }
@@ -215,13 +233,48 @@ void MainWindow::on_actionDark_triggered()
 }
 
 
+
 void MainWindow::on_actionOwn_editor_prametrs_triggered()
 {
     bool isOk;
 
     QFont customFont = QFontDialog::getFont(&isOk);
-    qApp->setFont(customFont);
+    if (isOk)
+        qApp->setFont(customFont);
+    else
+        this->statusBar()->showMessage("Can't set font options(");
 }
+
+
+void MainWindow::on_actionFilemap_triggered(bool checked)
+{
+    for (int i = 0; i < ui->tabWidget->count(); i++)
+    {
+        if (checked)
+            static_cast<TextEditorTab*>(ui->tabWidget->widget(i))->getFileOverView()->show();
+        else
+            static_cast<TextEditorTab*>(ui->tabWidget->widget(i))->getFileOverView()->hide();
+    }
+}
+
+
+void MainWindow::on_actionIncrease_font_size_triggered()
+{
+    for (int i = 0; i < ui->tabWidget->count(); i++)
+    {
+        static_cast<TextEditorTab*>(ui->tabWidget->widget(i))->editWorkSpaceFontSize(2);
+    }
+}
+
+
+void MainWindow::on_actionDecrease_font_size_triggered()
+{
+    for (int i = 0; i < ui->tabWidget->count(); i++)
+    {
+        static_cast<TextEditorTab*>(ui->tabWidget->widget(i))->editWorkSpaceFontSize(-2);
+    }
+}
+
 
 
 // help methods
@@ -241,6 +294,8 @@ void MainWindow::__on_change_text_editor_callback()
 
     if (!editor) {return;}
 
+    editor->getFileOverView()->setText(editor->getEditorSpace()->toPlainText());
+
     auto lineCount = editor->getEditorSpace()->document()->blockCount();
     /*for (uint8_t i = 0; i < lineCount; i++)
     {
@@ -258,14 +313,43 @@ void MainWindow::__on_change_text_editor_callback()
     }
 }
 
+void MainWindow::__setUp_current_line_highlighting(QTextEdit* editobject)
+{
+    QTextCursor cursor = editobject->textCursor();
+
+    QList<QTextEdit::ExtraSelection> extraSelectionsList;
+    QTextEdit::ExtraSelection selections;
+
+    selections.format.setBackground(Qt::darkCyan);
+    selections.format.setProperty(QTextFormat::FullWidthSelection, true);
+    selections.cursor = cursor;
+    selections.cursor.clearSelection();
+
+    extraSelectionsList.append(selections);
+    editobject->setExtraSelections(extraSelectionsList);
+}
+
 void MainWindow::__on_cursor_position_changed_callback()
 {
     QTextEdit* editor = static_cast<QTextEdit*>(sender());
-    if (editor)
+    QTextEdit* fileOverView = nullptr;
+
+    TextEditorTab* temp = static_cast<TextEditorTab*>(
+        ui->tabWidget->widget(ui->tabWidget->currentIndex())
+    );
+    if (temp)
+        fileOverView = temp->getFileOverView();
+
+    if (editor && fileOverView)
     {
-        QString cursorPositionString = "Pos: (%1, %2)";
         QTextCursor cursor = editor->textCursor();
 
+        fileOverView->setTextCursor(cursor);
+
+        __setUp_current_line_highlighting(editor);
+        __setUp_current_line_highlighting(fileOverView);
+
+        QString cursorPositionString = "Pos: (%1, %2)";
         currentCurrsorPositionLabel->setText(
             cursorPositionString.arg(cursor.columnNumber()).arg(
                 cursor.blockNumber()

@@ -7,6 +7,7 @@
 
 
 ## Next edits
+* fix new ability
 * fix some bugs with dark theme
 * add numbar to editor
 * add file overview area
